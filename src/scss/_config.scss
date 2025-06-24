@@ -1,0 +1,9 @@
+@use 'variables' as var;
+
+@function remove-unit($value) {
+    @return calc($value / ($value * 0 + 1));
+}
+
+@function rem($px, $base: var.$base-rem-size) {
+    @return remove-unit(calc($px / $base)) * 1rem;
+}

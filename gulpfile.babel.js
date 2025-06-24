@@ -34,6 +34,11 @@ const routers = {
         watch : 'src/js/**/*.js',
         src : "src/js/main.js",
         dest: "dist/js"
+    },
+    lottie : {
+        watch : 'src/lottie/**/*',
+        src : 'src/lottie/*',
+        dest : 'dist/lottie'
     }
 }
 
@@ -46,6 +51,7 @@ const watch = () => {
     gulp.watch(routers.scss.watch,styles)
     gulp.watch(routers.js.watch,js)
     gulp.watch(routers.img.watch,img)
+    gulp.watch(routers.lottie.watch,lottie)
 }
 
 const html  = () => gulp.src([routers.html.src])
@@ -56,6 +62,9 @@ const img = () => gulp.src(routers.img.src,{encoding: false})
     .pipe(newer(routers.img.src))
     .pipe(imagemin({verbose:true}))
     .pipe(gulp.dest(routers.img.dest));
+
+const lottie = () => gulp.src(routers.lottie.src)
+    .pipe(gulp.dest(routers.lottie.dest));
 
 const js = () => gulp.src(routers.js.src)
     .pipe(bro({transform: [babelify.configure({ presets: ['@babel/preset-env'] }), [ 'uglifyify', { global: true } ]]}))
@@ -68,7 +77,7 @@ const styles = () => gulp.src(routers.scss.src)
     .pipe(gulp.dest(routers.scss.dest));
 
 const prepare = gulp.series([clean])
-const assets = gulp.series([html,img,styles,js])
+const assets = gulp.series([html,img,styles,js,lottie])
 const postDev = gulp.parallel([webServer,watch])
 
 

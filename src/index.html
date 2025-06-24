@@ -2,13 +2,34 @@
 <html lang="ko">
 @@include('./html/include/head.html')
 <body>
-   <main id="container">
-       <section class="section"></section>
-       <section class="section"></section>
-       <section class="section"></section>
-       <section class="section"></section>
-       <section class="section"></section>
-   </main>
+<div id="container">
+    @@include('./html/include/header.html')
+    <main class="main">
+        <section class="section hero" style="display: none">
+            <ul class="splash-screen-wrapper">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </section>
+        <section class="section home" style="background-color:#000;">
+            <h3>Learn today,</h3>
+            <h3>use tomorrow</h3>
+            <i class="ico-star">
+                로고이미지
+            </i>
+            <!--돌아가는 Circle 이미지-->
+        </section>
+        <section class="section about" style="background-color:#fff;"></section>
+        <section class="section ability" style="background-color:#000;"></section>
+        <section class="section work" style="background-color:#fff;"></section>
+        <section class="section contact" style="background-color:#000;"></section>
+    </main>
+</div>
+<footer>
+
+</footer>
 </body>
-<script type="module" src="./js/main.js"></script>
 </html>
