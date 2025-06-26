@@ -3,6 +3,19 @@ import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
 import {SplitText} from "gsap/dist/SplitText";
 import imagesLoaded from "imagesloaded"
 import Lottie from "lottie-web";
+import Scrollbar from "smooth-scrollbar"
+import {setLayout ,setSmoothsScrollbar} from "./settings.js";
+
+const container = document.querySelector('#container');
+const options = {
+    damping: 0.1,
+    alwaysShowTracks: true,
+}
+const scrollbar = Scrollbar.init(container, {
+    ...options
+});
+
+
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -10,17 +23,35 @@ const tl = gsap.timeline();
 const mm = gsap.matchMedia();
 const noScroll = document.querySelector('#no-scroll')
 
-function naviAnimation() {
+function navigation() {
     let navList = gsap.utils.toArray('.navi-list > li')
-    navList.forEach((item) => {
-        const tl = gsap.timeline({paused: true})
-            .to(item, {
-                y: 30
-            })
+    let nav = document.querySelector('.sticky-header')
 
+    gsap.utils.toArray('.section').forEach((section,index)=>{
+        ScrollTrigger.create({
+            trigger:section,
+            start:()=> `top ${nav.offsetHeight}px`,
+            end:()=> `bottom ${nav.offsetHeight}px`,
+            toggleActions : 'restart none none reverse'
+        })
+    })
+
+
+
+
+
+    navList.forEach((item, index) => {
+        const tl = gsap.timeline({paused: true})
+            .to(item.querySelector('span'), {color: '#bbdde0'}, 0)
+            .to(item.querySelector('div'), {scaleX: 1, duration: 0.3}, 0)
 
         item.addEventListener('mouseover', () => tl.play())
         item.addEventListener('mouseleave', () => tl.reverse())
+
+        item.addEventListener('click',() =>{
+            let scrollTop = ScrollTrigger.getAll()[index].start + + nav.offsetHeight
+            scrollbar.scrollTo(0,scrollTop,600)
+        })
     })
 }
 
@@ -47,30 +78,40 @@ function showLoader() {
             },
         }, '<')
 }
+
 function headerAnimation() {
     // HeroAnimation 종료 NoScroll 제거 ✅
     const header = document.querySelector('.sticky-header')
-    tl.to(header, {y: 0,duration:0.3,ease:"power3.inOut",onComplete: () => {
-            gsap.to(noScroll,{display:'none'})
-        }})
+    tl
+        .to(header, {
+        y: 0, duration: 0.3, ease: "power3.inOut", onComplete: () => {
+            gsap.to(noScroll, {display: 'none'})
+        }
+    })
+
     return tl
+
+
+
 }
+
 function starAnimation() {
     const star = document.querySelector('.img-star')
-    gsap.set(star,{opacity:0})
+    gsap.set(star, {opacity: 0})
 
     tl
-        .to(star,{opacity:1})
+        .to(star, {opacity: 1})
         .to(star, {
             y: -20,
-            ease:"power3.inOut",
+            ease: "power3.inOut",
             repeat: -1,
             yoyo: true,
-        },'+=0.1')
+        }, '+=0.1')
 
     return tl
 
 }
+
 function textAnimation() {
     gsap.registerEffect({
         name: 'textEffect',
@@ -127,14 +168,52 @@ function init() {
         .on('always', HeroAnimation)
 }
 
+function scrollImg(){
+    const timeline = gsap.timeline()
+        .to('.img-star',{
+            rotation:360,
+            scale:100,
+        })
+        .to('.section02',{
+            backgroundColor:"#fff"
+        })
+        .to('.img-star',{
+            autoAlpha:0
+        })
 
+    ScrollTrigger.create({
+        trigger:'.home',
+        start:'top top',
+        end:'+=2000',
+        scrub:true,
+        markers:true,
+        animation:timeline
+    })
+}
 
-
+const markers = () => {
+    if (document.querySelector('.gsap-marker-scroller-start')) {
+        const markers = gsap.utils.toArray('[class *= "gsap-marker"]');
+        scrollbar.addListener(({ offset }) => {
+            gsap.set(markers, { marginTop: -offset.y });
+        });
+    }
+}
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    setSmoothsScrollbar();
+    setLayout();
     init();
+    navigation();
+    scrollImg();
+
+    markers();
+
 })
+
+
+
 
 
 

@@ -1,5 +1,8 @@
 @use 'config';
 @use 'variables' as var;
+body{
+    overflow: hidden;
+}
 #no-scroll {
     width: 100vw;
     height: 100vh;
@@ -33,6 +36,7 @@
             width: 20%;
             height: 100%;
             background-color: var.$primary-color;
+
         }
 
     }
@@ -62,10 +66,9 @@ h2{
 }
 .sticky-header{
     position: fixed;
-    top: 0;
     left: 0;
     width: 100%;
-    background-color: #fff;
+    background-color: var.$secondary-color;
     z-index: 101;
     transform: translateY(config.rem(-90));
     .header-grid{
@@ -81,6 +84,16 @@ h2{
             cursor: pointer;
             font-weight: var.$font-weight-semi-bold;
             font-size: config.rem(24);
+            position: relative;
+            .bar{
+                bottom: config.rem(-6);
+                left: 0;
+                position: absolute;
+                border: 1px solid var.$primary-color;
+                transform: scaleX(0);
+                width: 100%;
+                transform-origin: left center;
+            }
         }
     }
 }
@@ -90,6 +103,7 @@ h2{
     height: 100vh;
     position: relative;
     &.home{
+
         h2{
             display: none;
         }
