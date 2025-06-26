@@ -32,7 +32,7 @@ const routers = {
     },
     js : {
         watch : 'src/js/**/*.js',
-        src : "src/js/main.js",
+        src : "src/js/*",
         dest: "dist/js"
     },
     lottie : {

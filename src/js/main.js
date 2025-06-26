@@ -2,8 +2,6 @@ import {gsap} from "gsap/dist/gsap";
 import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
 import {SplitText} from "gsap/dist/SplitText";
 import imagesLoaded from "imagesloaded"
-import {renderLayout} from "./setting.js";
-import {setSmoothScroll,setMixedScroll,markers} from "./scroll.js";
 import Lottie from "lottie-web";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -129,40 +127,13 @@ function init() {
         .on('always', HeroAnimation)
 }
 
-function scrollAni(){
-    const timeline = gsap.timeline()
-    timeline.to('.img-star',{rotation:360,scale:30})
-        .to('.about',{backgroundColor:'#Fff'})
-
-    ScrollTrigger.create({
-        trigger:'.home',
-        start:'top top',
-        end:innerHeight,
-        animation:tl,
-        pin:false,
-        markers:false,
-        scrub:true,
-    })
-}
-
 
 
 
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    renderLayout();
-    setSmoothScroll();
-    setMixedScroll();
     init();
-    scrollAni();
-
-
-
-
-
-
-    // markers();
 })
 
 
