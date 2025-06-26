@@ -1,6 +1,5 @@
 @use 'config';
 @use 'variables' as var;
-
 #no-scroll {
     width: 100vw;
     height: 100vh;
@@ -11,6 +10,52 @@
     bottom: 0;
     z-index: 102
 }
+#container{
+    height: 100vh;
+}
+.splash-loader-box{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 102;
+    .splash-screen {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        .item {
+            width: 20%;
+            height: 100%;
+            background-color: var.$primary-color;
+        }
+
+    }
+    .progress-box{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        z-index: 13;
+        p{
+            font-weight: var.$font-weight-semi-bold;
+            color: var.$secondary-color;
+            font-size: config.rem(54);
+
+        }
+    }
+}
+
+h2{
+    margin:0;
+    font-size: 5vw;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
 
 .sticky-header{
     position: fixed;
@@ -19,6 +64,7 @@
     width: 100%;
     background-color: #fff;
     z-index: 101;
+    transform: translateY(config.rem(-90));
     .header-grid{
         display: flex;
         justify-content: space-between;
@@ -36,8 +82,17 @@
     }
 }
 .section{
+    position: relative;
     width: 100vw;
     height: 100vh;
+    &.h-section{
+        width: 200vw;
+        display: flex;
+        .section{
+            z-index: 1;
+            flex-shrink: 0;
+        }
+    }
 
     &.hero {
         position: fixed;
@@ -53,28 +108,46 @@
             left: 50%;
             transform: translate(-50%,-50%);
         }
-        .splash-screen-wrapper {
-            background-color: var.$primary-color;
-            width: 100%;
-            display: flex;
-            height: 100%;
-            li {
-                width: 20%;
-                height: 100%;
-                background-color: #fff;
-            }
 
-        }
     }
     &.home{
-
+        h2{
+            display: none;
+        }
+        .word-outer{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .word-inner{
+            font-weight: var.$font-weight-black-bold;
+            font-size: config.rem(128);
+        }
+        .img-star{
+            position: absolute;
+            z-index: 1;
+            bottom: config.rem(30);
+            left: 50%;
+            transform: translate(-50%);
+            width: config.rem(90);
+            height: config.rem(80);
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
     }
 }
+
 .footer{
 
 }
 .go-top{
 
 }
+
+
 
 

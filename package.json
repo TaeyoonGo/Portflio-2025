@@ -31,9 +31,9 @@
     "last 2 version"
   ],
   "dependencies": {
-    "@lottiefiles/dotlottie-web": "^0.46.0",
     "gsap": "^3.13.0",
     "imagesloaded": "^5.0.0",
-    "lottie-web": "^5.12.2"
+    "lottie-web": "^5.13.0",
+    "smooth-scrollbar": "^8.8.4"
   }
 }

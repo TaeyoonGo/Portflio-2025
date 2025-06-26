@@ -2,34 +2,49 @@
 <html lang="ko">
 @@include('./html/include/head.html')
 <body>
+
+<div class="splash-loader-box">
+    <ul class="splash-screen">
+        <li class="item"></li>
+        <li class="item"></li>
+        <li class="item"></li>
+        <li class="item"></li>
+        <li class="item"></li>
+    </ul>
+    <div class="progress-box">
+        <div>
+            <lottie-player class="hello" controls id="lottie"></lottie-player>
+            <p>100%</p>
+        </div>
+    </div>
+</div>
 <div id="container">
     @@include('./html/include/header.html')
     <main class="main">
-        <section class="section hero" style="display: none">
-            <ul class="splash-screen-wrapper">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
+        <section class="section home">
+            <div class="word-outer">
+                <div class="word-inner">
+                    <h3>Learn today,</h3>
+                    <h3>Use tomorrow</h3>
+                </div>
+            </div>
+            <div class="img-star">
+                <img src="img/ico-star.png" alt="별이미지">
+            </div>
         </section>
-        <section class="section home" style="background-color:#000;">
-            <h3>Learn today,</h3>
-            <h3>use tomorrow</h3>
-            <i class="ico-star">
-                로고이미지
-            </i>
-            <!--돌아가는 Circle 이미지-->
+        <section class="section about"></section>
+        <section class="section h-section">
+            <section class="section ability"></section>
+            <section class="section work"></section>
         </section>
-        <section class="section about" style="background-color:#fff;"></section>
-        <section class="section ability" style="background-color:#000;"></section>
-        <section class="section work" style="background-color:#fff;"></section>
-        <section class="section contact" style="background-color:#000;"></section>
-    </main>
-</div>
-<footer>
 
-</footer>
+        <section class="section contact"></section>
+    </main>
+    @@include('./html/include/footer.html')
+</div>
+
 </body>
+<script>
+
+</script>
 </html>

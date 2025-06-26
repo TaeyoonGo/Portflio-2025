@@ -1,43 +1,107 @@
-import { gsap } from "gsap/dist/gsap";
+import {gsap} from "gsap/dist/gsap";
+import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
+import {SplitText} from "gsap/dist/SplitText";
+import {renderLayout, setSmoothScroll} from "./setting.js";
+import Lottie from "lottie-web";
 
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { ScrollSmoother } from "gsap/dist/ScrollSmoother";
-import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
-import { SplitText } from "gsap/dist/SplitText";
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
-gsap.registerPlugin(ScrollTrigger,ScrollSmoother,ScrollToPlugin,SplitText);
+Lottie.loadAnimation({
+    container: document.querySelector('#lottie'), // the dom element that will contain the animation
+    loop: true,
+    autoplay: true,
+    path: '/lottie/loading.json' // the path to the animation json
+});
 
-function HeroAnimation() {
-    gsap.set('.splash-screen-wrapper > li', {yPercent: 100})
-    gsap.set('.sticky-header', {y: -90})
 
-    const tl = gsap.timeline()
-        .from('.splash-screen-wrapper > li', {
-            yPercent: 0,
-            duration: 2,
-            stagger: {
-                each: 0.2,
-                ease: 'power3.inOut',
-                from: 'random'
-            }
-        })
-        .to('.sticky-header', {
-            y: 0,
-        })
-        .to('.ico-star', {}, '<')
-}
-function MainTextAnimation(){}
-function rotationAnimation(){
+const tl = gsap.timeline();
+const mm = gsap.matchMedia();
+
+
+function MasterHeroAnimation() {
 
 }
 
 
 
 
-function HeroAnimation(){
+
+
+function loaderAnimation() {
+
+
+
+
+
+
+
+    const splash = gsap.utils.toArray('.splash-screen .item');
+    gsap.set(splash, {yPercent: 100})
+
+    tl.from(splash, {
+        yPercent: 0,
+        duration: 1,
+        stagger: {
+            each: 0.2,
+            ease: 'power3.inOut',
+            from:'center'
+
+        },
+        onComplete:()=>{
+            gsap.set('.splash-loader-box', {display:'none'})
+        }
+    })
+}
+
+// loaderAnimation()
+
+
+function textAnimation() {
+    gsap.registerEffect({
+        name: 'textEffect',
+        extendTimeline: true,
+        defaults: {
+            y: -50,
+        },
+        effect: (target, config) => {
+            const {chars} = new SplitText(target, {type: 'chars'})
+            tl.from(chars, {y: config.y, opacity: 0, stagger: 0.05})
+            return tl;
+        }
+    })
+    const animation = gsap.timeline()
+
+    animation.textEffect('.word-inner > h3:first-child')
+    animation.textEffect('.word-inner > h3:last-child', "<")
+
+    return animation
+}
+
+function headerAnimation() {
+    const header = document.querySelector('.sticky-header')
+    tl.to(header, {y: 0})
+    return tl
+}
+
+function starAnimation() {
+    tl.to('.img-star', {
+        y: -20,
+        repeat: -1,
+        yoyo: true,
+    })
+
+    return tl
 
 }
 
+
+// splashAnimation()
+// textAnimation()
+// headerAnimation()
+// starAnimation()
+
+
+MasterHeroAnimation()
 
 
 function naviAnimation() {
@@ -55,20 +119,10 @@ function naviAnimation() {
 }
 
 
-
-
-function init(){
-    HeroAnimation()
-    MainTextAnimation()
-    naviAnimation()
-
-}
-
-
 document.addEventListener('DOMContentLoaded', () => {
-
+    renderLayout();
+    setSmoothScroll();
 })
-
 
 
 
