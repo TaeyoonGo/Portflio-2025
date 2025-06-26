@@ -8,7 +8,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 102
+    background-color: var.$primary-color;
+    z-index: 102;
+
 }
 #container{
     height: 100vh;
@@ -19,6 +21,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    visibility: hidden;
     right: 0;
     bottom: 0;
     z-index: 102;
@@ -56,7 +59,6 @@ h2{
     top: 50%;
     transform: translate(-50%,-50%);
 }
-
 .sticky-header{
     position: fixed;
     top: 0;
@@ -81,35 +83,11 @@ h2{
         }
     }
 }
+
 .section{
-    position: relative;
     width: 100vw;
     height: 100vh;
-    &.h-section{
-        width: 200vw;
-        display: flex;
-        .section{
-            z-index: 1;
-            flex-shrink: 0;
-        }
-    }
-
-    &.hero {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 100;
-        .loading-box {
-            background-color: red;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-        }
-
-    }
+    position: relative;
     &.home{
         h2{
             display: none;
@@ -139,6 +117,18 @@ h2{
             }
         }
     }
+    .horizontal {
+        width: fit-content;
+        height: 100vh;
+        display: flex;
+        .section{
+            height: 100vh;
+            width: 100vw;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 10;
+        }
+    }
 }
 
 .footer{
@@ -151,3 +141,7 @@ h2{
 
 
 
+.img{
+    width: config.rem(50);
+    height: config.rem(50);
+}
