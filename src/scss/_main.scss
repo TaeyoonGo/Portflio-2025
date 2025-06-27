@@ -1,7 +1,7 @@
 @use 'config';
 @use 'variables' as var;
 body{
-    overflow: hidden;
+
 }
 #no-scroll {
     width: 100vw;
@@ -102,8 +102,8 @@ h2{
     width: 100vw;
     height: 100vh;
     position: relative;
-    &.home{
-
+    padding: 0 config.rem(40);
+    &.section01{
         h2{
             display: none;
         }
@@ -132,18 +132,26 @@ h2{
             }
         }
     }
-    .horizontal {
-        width: fit-content;
-        height: 100vh;
-        display: flex;
-        .section{
-            height: 100vh;
-            width: 100vw;
-            flex-shrink: 0;
-            position: relative;
-            z-index: 10;
+    &.section03{
+
+        .word-outer{
+            width: 100%;
+            height: 100%;
+            .word-inner{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        h2{
+            display: none;
+        }
+        h3{
+            font-weight: var.$font-weight-black-bold;
+            font-size: config.rem(100);
         }
     }
+
 }
 
 .footer{

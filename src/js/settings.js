@@ -1,8 +1,4 @@
 import {gsap} from "gsap/dist/gsap";
-import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
-import Scrollbar from 'smooth-scrollbar/dist/smooth-scrollbar';
-
-
 function setLayout(){
   const sectionColors = ['#f2eee5','#e5c1c5','#c3e2dd','#6eceda','#FB9DA7','#FCCCD4','#FBDEA2','#F2E2C6','#8EB695']
 
@@ -20,34 +16,4 @@ function setLayout(){
 }
 
 
-
-
-function setSmoothsScrollbar(){
-  gsap.registerPlugin(ScrollTrigger);
-
-  const container = document.querySelector('#container');
-
-  const options = {
-    damping: 0.1,
-    alwaysShowTracks: true,
-  }
-  const scrollbar = Scrollbar.init(container, {
-    ...options
-  });
-
-  ScrollTrigger.scrollerProxy(container, {
-    scrollTop(value) {
-      if (arguments.length) {
-        scrollbar.scrollTop = value; // setter
-      }
-      return scrollbar.scrollTop; // getter
-    },
-  });
-
-  scrollbar.addListener(ScrollTrigger.update);
-  ScrollTrigger.defaults({ scroller: container });
-}
-
-
-
-export {setSmoothsScrollbar , setLayout}
+export {setLayout}
