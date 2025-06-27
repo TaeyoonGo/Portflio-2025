@@ -2,28 +2,33 @@
 <html lang="ko">
 @@include('./html/include/head.html')
 <body>
-<div id="no-scroll">
-    <div class="splash-loader-box">
-        <ul class="splash-screen">
-            <li class="item"></li>
-            <li class="item"></li>
-            <li class="item"></li>
-            <li class="item"></li>
-            <li class="item"></li>
-        </ul>
-        <div class="progress-box">
-            <div>
-                <lottie-player autoplay controls id="lottie"></lottie-player>
-                <p class="loader-text"></p>
-            </div>
+<div class="splash-loader-box">
+    <div class="progress-box">
+        <div>
+            <lottie-player autoplay controls id="lottie"></lottie-player>
+            <p class="loader-text"></p>
         </div>
     </div>
+    <ul class="splash-screen">
+        <li class="item"></li>
+        <li class="item"></li>
+        <li class="item"></li>
+        <li class="item"></li>
+        <li class="item"></li>
+    </ul>
 </div>
+@@include('./html/include/header.html')
 <div id="smooth-wrapper">
     <div id="smooth-content">
-        @@include('./html/include/header.html')
         <main class="main">
             <section class="section section01 home">
+                <div class="circle-box top">
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
                 <div class="word-outer">
                     <div class="word-inner">
                         <h3>Learn today,</h3>
@@ -40,6 +45,13 @@
                         <a href="" target="_blank"></a>
                         <p>스크롤을 아래로</p>
                     </div>
+                </div>
+                <div class="circle-box bottom">
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
                 </div>
             </section>
             <section class="section section02"></section>
