@@ -206,17 +206,24 @@ const homeAni = () => {
 
 const abilityAni = () => {
     const {words} = new SplitText('.section3 .skill-list', {type: 'words'})
-    const wordwrap = document.querySelector('.section3 .word-inner')
 
-    ScrollTrigger.create({
-        trigger:'.section3',
-        top:'top top',
-        bottom:'bottom top',
-        pin: true,
-        pinSpacing: false,
-        scrub: true,
-        markers:true,
-
+    const wordwrap = document.querySelector('.section3 .word-outer')
+    gsap.fromTo(wordwrap, {x:0}, {
+        x: -(wordwrap.scrollWidth - innerWidth),
+        scrollTrigger: {
+            start: 'top center',
+            end : 'bottom center',
+            markers:true,
+            trigger: wordwrap,
+            scrub: 0.5,
+            onUpdate:({progress})=>{
+                let widthToProgress = progress.toFixed(2) * 100
+                gsap.to('.section3',{
+                    background : widthToProgress >= 50 ? '#000' : '#fff',
+                    color : widthToProgress >= 50 ? '#fff' : '#000'
+                })
+            }
+        }
     })
 }
 
