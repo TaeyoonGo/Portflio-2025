@@ -142,17 +142,12 @@ const mousePoint = () =>{
     let cursor = document.querySelector('#cursor');
     let body = document.querySelector('body')
 
-
-    // console.log(cursor, body)
-    // let widthToProgress = gsap.utils.mapRange(0,innerWidth,0,100);
-
     let xTo = gsap.quickTo(cursor,"x",{duration:0.4,ease:'power3'})
     let yTo = gsap.quickTo(cursor,"y",{duration:0.4,ease:'power3'})
 
     body.addEventListener('mousemove',({clientX : x ,clientY: y})=>{
             xTo(x - (cursor.offsetWidth * 0.5))
             yTo(y - (cursor.offsetHeight * 0.5))
-        console.log(x,y)
     })
 
 
@@ -192,7 +187,6 @@ const homeAni = () => {
         pin: true,
         pinSpacing: true,
         scrub: true,
-        markers: true,
         animation: timeline,
     })
 }
@@ -206,7 +200,21 @@ const workAni = () => {
 
 }
 const contactAni = () => {
+    const footer = document.querySelector('.footer')
+    gsap.set(footer,{yPercent:100})
+    let animation = gsap.to(footer,{yPercent:0})
 
+
+
+    ScrollTrigger.create({
+        ease:'none',
+        trigger:'.section5',
+        start:'top center',
+        end:'center center',
+        markers:true,
+        animation:animation,
+        scrub:true,
+    })
 }
 
 
