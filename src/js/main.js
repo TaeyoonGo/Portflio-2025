@@ -139,8 +139,9 @@ const Loading = () => {
 }
 
 const mousePoint = () =>{
-    let cursor = document.querySelector('#cursor');
-    let body = document.querySelector('body')
+    const cursor = document.querySelector('#cursor');
+    const body = document.querySelector('body')
+    const visibleCursorShow = gsap.utils.toArray('.visible-cursor-show');
 
     let xTo = gsap.quickTo(cursor,"x",{duration:0.4,ease:'power3'})
     let yTo = gsap.quickTo(cursor,"y",{duration:0.4,ease:'power3'})
@@ -148,7 +149,19 @@ const mousePoint = () =>{
     body.addEventListener('mousemove',({clientX : x ,clientY: y})=>{
             xTo(x - (cursor.offsetWidth * 0.5))
             yTo(y - (cursor.offsetHeight * 0.5))
+
+
     })
+
+    visibleCursorShow.forEach((show,index)=>{
+        show.addEventListener('mouseenter',()=>{
+            gsap.to(cursor.querySelector('span'),{autoAlpha:1})
+        })
+        show.addEventListener('mouseleave',()=>{
+            gsap.to(cursor.querySelector('span'),{autoAlpha:0})
+        })
+    })
+
 
 
 }
@@ -193,7 +206,18 @@ const homeAni = () => {
 
 const abilityAni = () => {
     const {words} = new SplitText('.section3 .skill-list', {type: 'words'})
+    const wordwrap = document.querySelector('.section3 .word-inner')
 
+    ScrollTrigger.create({
+        trigger:'.section3',
+        top:'top top',
+        bottom:'bottom top',
+        pin: true,
+        pinSpacing: false,
+        scrub: true,
+        markers:true,
+
+    })
 }
 
 const workAni = () => {
@@ -211,7 +235,6 @@ const contactAni = () => {
         trigger:'.section5',
         start:'top center',
         end:'center center',
-        markers:true,
         animation:animation,
         scrub:true,
     })
