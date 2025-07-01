@@ -160,22 +160,22 @@ h2{
         }
     }
     &.section3{
+        .word-container{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
         .word-outer{
             width: 100%;
             height: 100%;
-            .word-inner{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
         }
         .word-inner{
+            gap: 3vw;
             display: flex;
-        }
-        .skill-list{
-            display: flex;
-            font-weight: var.$font-weight-black-bold;
-            font-size: 6vw
+            *{
+                font-weight: var.$font-weight-black-bold;
+                font-size: 6vw
+            }
         }
     }
     &.section5{

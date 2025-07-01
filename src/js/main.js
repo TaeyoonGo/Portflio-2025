@@ -105,14 +105,10 @@ const navigation = () => {
 
         item.addEventListener('mouseover', () => tl.play())
         item.addEventListener('mouseleave', () => tl.reverse())
-        item.addEventListener('click',()=>{
+        item.addEventListener('click', () => {
 
         })
     })
-
-
-
-
 
 
 }
@@ -138,37 +134,36 @@ const Loading = () => {
         .on('always', IntroMasterTimeline)
 }
 
-const mousePoint = () =>{
+const mousePoint = () => {
     const cursor = document.querySelector('#cursor');
     const body = document.querySelector('body')
     const visibleCursorShow = gsap.utils.toArray('.visible-cursor-show');
 
-    let xTo = gsap.quickTo(cursor,"x",{duration:0.4,ease:'power3'})
-    let yTo = gsap.quickTo(cursor,"y",{duration:0.4,ease:'power3'})
+    let xTo = gsap.quickTo(cursor, "x", {duration: 0.4, ease: 'power3'})
+    let yTo = gsap.quickTo(cursor, "y", {duration: 0.4, ease: 'power3'})
 
-    body.addEventListener('mousemove',({clientX : x ,clientY: y})=>{
-            xTo(x - (cursor.offsetWidth * 0.5))
-            yTo(y - (cursor.offsetHeight * 0.5))
+    body.addEventListener('mousemove', ({clientX: x, clientY: y}) => {
+        xTo(x - (cursor.offsetWidth * 0.5))
+        yTo(y - (cursor.offsetHeight * 0.5))
 
 
     })
 
-    visibleCursorShow.forEach((show,index)=>{
-        show.addEventListener('mouseenter',()=>{
-            gsap.to(cursor.querySelector('span'),{autoAlpha:1})
+    visibleCursorShow.forEach((show, index) => {
+        show.addEventListener('mouseenter', () => {
+            gsap.to(cursor.querySelector('span'), {autoAlpha: 1})
         })
-        show.addEventListener('mouseleave',()=>{
-            gsap.to(cursor.querySelector('span'),{autoAlpha:0})
+        show.addEventListener('mouseleave', () => {
+            gsap.to(cursor.querySelector('span'), {autoAlpha: 0})
         })
     })
-
 
 
 }
 
-const circleAni = () => {}
+const circleAni = () => {
 
-
+}
 
 
 function init() {
@@ -205,25 +200,37 @@ const homeAni = () => {
 }
 
 const abilityAni = () => {
-    const {words} = new SplitText('.section3 .skill-list', {type: 'words'})
+    // 1. 부모 요소를 pin 고정 후 레이아웃 움직이지 못하게
+    // 2. 자식 요소에 애니메이션 추가
+    // 3. 부모요소 스크롤 시 자식요소 애니메이션 동작하게 작업
+    const wordLayout = document.querySelector('.section3 .word-inner')
+    const {words} = new SplitText(wordLayout, {type: 'words'})
 
-    const wordwrap = document.querySelector('.section3 .word-outer')
-    gsap.fromTo(wordwrap, {x:0}, {
-        x: -(wordwrap.scrollWidth - innerWidth),
-        scrollTrigger: {
-            start: 'top center',
-            end : 'bottom center',
-            markers:true,
-            trigger: wordwrap,
-            scrub: 0.5,
-            onUpdate:({progress})=>{
-                let widthToProgress = progress.toFixed(2) * 100
-                gsap.to('.section3',{
-                    background : widthToProgress >= 50 ? '#000' : '#fff',
-                    color : widthToProgress >= 50 ? '#fff' : '#000'
-                })
-            }
+    const animation = gsap.fromTo(words,
+        {
+            x: 0,
+        },
+        {
+            x: -3000,
+        },
+    )
+
+    ScrollTrigger.create({
+        trigger: '.section3',
+        start: 'top top',
+        end: '+=3000',
+        pin: true,
+        markers: true,
+        animation,
+        scrub: true,
+        onUpdate:({progress})=>{
+            let widthToProgress = progress.toFixed(2) * 100
+            gsap.to('.section3',{
+                background : widthToProgress >= 40 ? '#000' : '#fff',
+                color : widthToProgress >= 40 ? '#fff' : '#000'
+            })
         }
+
     })
 }
 
@@ -232,18 +239,19 @@ const workAni = () => {
 }
 const contactAni = () => {
     const footer = document.querySelector('.footer')
-    gsap.set(footer,{yPercent:100})
-    let animation = gsap.to(footer,{yPercent:0})
+    gsap.set(footer, {yPercent: 100})
 
-
+    // const timeline = gsap.timeline()
+    let animation = gsap.to(footer, {yPercent: 0, duration: 0.3, ease: 'power3.inOut'})
 
     ScrollTrigger.create({
-        ease:'none',
-        trigger:'.section5',
-        start:'top center',
-        end:'center center',
-        animation:animation,
-        scrub:true,
+        ease: 'none',
+        trigger: '.section5',
+        start: '40% center',
+        end: 'center center',
+        animation: animation,
+        toggleActions: "play play reverse reverse"
+
     })
 }
 
@@ -251,7 +259,6 @@ const contactAni = () => {
 document.addEventListener('DOMContentLoaded', () => {
     setLayout();
     init();
-
 })
 
 
