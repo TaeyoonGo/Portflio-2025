@@ -167,8 +167,6 @@ const circleAni = () => {
 
 
 function init() {
-    smoother.paused(true);
-    document.scrollingElement.scrollTo(0, 0);
     Loading();
 
     mousePoint();
@@ -206,12 +204,15 @@ const abilityAni = () => {
     const wordLayout = document.querySelector('.section3 .word-inner')
     const {words} = new SplitText(wordLayout, {type: 'words'})
 
+
     const animation = gsap.fromTo(words,
         {
             x: 0,
         },
         {
-            x: -3000,
+            x() {
+                return -(wordLayout.scrollWidth - innerWidth)
+            },
         },
     )
 
@@ -220,17 +221,36 @@ const abilityAni = () => {
         start: 'top top',
         end: '+=3000',
         pin: true,
-        markers: true,
         animation,
         scrub: true,
-        onUpdate:({progress})=>{
+        onUpdate: ({progress, getVelocity}) => {
             let widthToProgress = progress.toFixed(2) * 100
-            gsap.to('.section3',{
-                background : widthToProgress >= 40 ? '#000' : '#fff',
-                color : widthToProgress >= 40 ? '#fff' : '#000'
-            })
-        }
+            let scrollToVelocity = getVelocity()
 
+
+            // let value = gsap.utils.mapRange(0,getVelocity(),-20,20)
+
+            gsap.to('.section3', {
+                background: widthToProgress >= 40 ? '#000' : '#fff',
+                color: widthToProgress >= 40 ? '#fff' : '#000'
+            })
+
+            gsap.fromTo(words,
+                {
+                    skewX: `${getVelocity() / 100}deg`,
+                    duration:1,
+                }, {
+                    skewX: 0,
+                    duration:1,
+                })
+
+
+            // if(e.direction > 0){
+            //     tl.to(words,{skewX:"15deg",duration:1})
+            // }else{
+            //     tl.to(words,{skewX:"-15deg",duration:1})
+            // }
+        },
     })
 }
 
@@ -257,6 +277,9 @@ const contactAni = () => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    document.scrollingElement.scrollTo(0, 0);
+    smoother.paused(true);
+
     setLayout();
     init();
 })
