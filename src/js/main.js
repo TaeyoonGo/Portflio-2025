@@ -5,7 +5,6 @@ import {SplitText} from "gsap/dist/SplitText";
 import {ScrollToPlugin} from "gsap/dist/ScrollToPlugin"
 import imagesLoaded from "imagesloaded"
 import Lottie from "lottie-web";
-import {setLayout} from "./settings.js";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, ScrollToPlugin);
 
@@ -21,12 +20,12 @@ let smoother = ScrollSmoother.create({
 
 const IntroProgress = () => {
     const items = document.querySelectorAll('.splash-screen .item')
-    const splashItems = gsap.utils.toArray(items)
-    gsap.set(splashItems, {yPercent: 0})
+    const itemsArr = gsap.utils.toArray(items)
+    gsap.set(itemsArr, {yPercent: 0})
     const animation = gsap.timeline()
     animation
         .to('.progress-box', {autoAlpha: 0, duration: 0.3})
-        .to(splashItems, {
+        .to(itemsArr, {
             yPercent: 100,
             duration: 1,
             stagger: {
@@ -93,13 +92,13 @@ const IntroMasterTimeline = () => {
 }
 
 const navigation = () => {
-    let navList = gsap.utils.toArray('.navi-list > li')
+    let navArr = gsap.utils.toArray('.navi-list > li')
     let header = document.querySelector('.sticky-header')
 
 
-    navList.forEach((item, index) => {
+    navArr.forEach((item, index) => {
         const tl = gsap.timeline({paused: true})
-            .to(item.querySelector('span'), {color: '#bbdde0'}, 0)
+            // .to(item.querySelector('span'), {color: '#bbdde0'}, 0)
             .to(item.querySelector('div'), {scaleX: 1, duration: 0.3}, 0)
 
 
@@ -120,16 +119,16 @@ const Loading = () => {
         autoplay: true,
         path: '/lottie/loading.json'
     });
-    const img = gsap.utils.toArray('img')
+    const imgAll = gsap.utils.toArray('img')
     const updateProgress = (instance) => {
-        let numberPercent = instance.progressedCount / img.length
+        let numberPercent = instance.progressedCount / imgAll.length
         const loaderText = document.querySelector('.loader-text')
         loaderText.textContent = `${Math.round(numberPercent * 100)}%`
         if ((numberPercent) === 1) {
             lottie.pause()
         }
     }
-    imagesLoaded(img)
+    imagesLoaded(imgAll)
         .on('progress', updateProgress)
         .on('always', IntroMasterTimeline)
 }
@@ -137,7 +136,7 @@ const Loading = () => {
 const mousePoint = () => {
     const cursor = document.querySelector('#cursor');
     const body = document.querySelector('body')
-    const visibleCursorShow = gsap.utils.toArray('.visible-cursor-show');
+    const visibleArr = gsap.utils.toArray('.visible-cursor-show');
 
     let xTo = gsap.quickTo(cursor, "x", {duration: 0.4, ease: 'power3'})
     let yTo = gsap.quickTo(cursor, "y", {duration: 0.4, ease: 'power3'})
@@ -149,11 +148,13 @@ const mousePoint = () => {
 
     })
 
-    visibleCursorShow.forEach((show, index) => {
+    visibleArr.forEach((show, index) => {
         show.addEventListener('mouseenter', () => {
+            cursor.style.mixBlendMode = 'normal';
             gsap.to(cursor.querySelector('span'), {autoAlpha: 1})
         })
         show.addEventListener('mouseleave', () => {
+            cursor.style.mixBlendMode = 'difference';
             gsap.to(cursor.querySelector('span'), {autoAlpha: 0})
         })
     })
@@ -227,9 +228,6 @@ const abilityAni = () => {
             let widthToProgress = progress.toFixed(2) * 100
             let scrollToVelocity = getVelocity()
 
-
-            // let value = gsap.utils.mapRange(0,getVelocity(),-20,20)
-
             gsap.to('.section3', {
                 background: widthToProgress >= 40 ? '#000' : '#fff',
                 color: widthToProgress >= 40 ? '#fff' : '#000'
@@ -237,7 +235,7 @@ const abilityAni = () => {
 
             gsap.fromTo(words,
                 {
-                    skewX: `${getVelocity() / 100}deg`,
+                    skewX: `${scrollToVelocity / 200}deg`,
                     duration:1,
                 }, {
                     skewX: 0,
@@ -255,7 +253,17 @@ const abilityAni = () => {
 }
 
 const workAni = () => {
+    const imagesArr = gsap.utils.toArray('.img-container .img')
+    gsap.set('.img-container .img',{
+        zIndex:gsap.utils.distribute({
+            base:1,
+            amount:10,
+            from:'end'
+        })
+    })
+    imagesArr.forEach((image,index)=>{
 
+    })
 }
 const contactAni = () => {
     const footer = document.querySelector('.footer')
@@ -280,7 +288,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.scrollingElement.scrollTo(0, 0);
     smoother.paused(true);
 
-    setLayout();
     init();
 })
 
