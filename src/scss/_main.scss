@@ -183,18 +183,21 @@ h2{
     }
     &.section4{
         background-color: #000000;
-        padding: config.rem(40);
         .work-container{
+            gap: config.rem(30);
+            padding: config.rem(40);
             display: flex;
             justify-content: space-between;
         }
         .img-container{
+            flex: 1 1 100%;
+            position: relative;
             .img{
                 position: absolute;
-                top: config.rem(40);
-                left: config.rem(40);
-                width: 40vw;
-                height: 50vh;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: auto;
                 filter: brightness(0.4);
                 img{
                     width: 100%;
@@ -203,9 +206,27 @@ h2{
             }
         }
         .text-container{
+            flex: 1 1 100%;
+            color: #fff;
+            a{
+                color: inherit;
+            }
+            .work-text-box{
+                li{
+                    display: flex;
+                    padding: config.rem(20) 0;
+                    border-bottom: config.rem(1) solid #fff;
+                    span{
+                        &:first-child{
+                            flex: 0 0 15%;
+                            font-weight: var.$font-weight-semi-bold;
+                        }
+                    }
+                    a{
+                        margin-left: auto;
+                    }
+                }
 
-            *{
-                color: #fff;
             }
         }
 

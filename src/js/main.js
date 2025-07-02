@@ -144,8 +144,6 @@ const mousePoint = () => {
     body.addEventListener('mousemove', ({clientX: x, clientY: y}) => {
         xTo(x - (cursor.offsetWidth * 0.5))
         yTo(y - (cursor.offsetHeight * 0.5))
-
-
     })
 
     visibleArr.forEach((show, index) => {
@@ -235,7 +233,7 @@ const abilityAni = () => {
 
             gsap.fromTo(words,
                 {
-                    skewX: `${scrollToVelocity / 200}deg`,
+                    skewX: `${scrollToVelocity / 100}deg`,
                     duration:1,
                 }, {
                     skewX: 0,
@@ -285,9 +283,8 @@ const contactAni = () => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.scrollingElement.scrollTo(0, 0);
-    smoother.paused(true);
-
+    // document.scrollingElement.scrollTo(0, 0);
+    // smoother.paused(true);
     init();
 })
 
