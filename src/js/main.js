@@ -85,7 +85,6 @@ const IntroMasterTimeline = () => {
         .add(IntroText(), "+=0.3")
         .add(ImgStarAni(), '+=1')
         .add(HeaderAni(), '<')
-        // .add(circleAni())
         .add(() => {
             smoother.paused(false)
         })
@@ -239,29 +238,66 @@ const abilityAni = () => {
                     skewX: 0,
                     duration:1,
                 })
-
-
-            // if(e.direction > 0){
-            //     tl.to(words,{skewX:"15deg",duration:1})
-            // }else{
-            //     tl.to(words,{skewX:"-15deg",duration:1})
-            // }
         },
     })
 }
 
 const workAni = () => {
     const imagesArr = gsap.utils.toArray('.img-container .img')
-    gsap.set('.img-container .img',{
-        zIndex:gsap.utils.distribute({
-            base:1,
-            amount:10,
-            from:'end'
+    const listArr = gsap.utils.toArray('.work-text-box li')
+    let count = 11;
+
+    gsap.defaults({
+        overwrite:'auto'
+    })
+
+    gsap.set(imagesArr, {
+        zIndex: gsap.utils.distribute({
+            base: 0,
+            amount: count,
+            from: 'end',
+        }),
+    })
+
+
+
+    listArr.forEach((list,index)=>{
+        list.addEventListener('mouseover',()=>{
+            const exceptMe = `.img-container .img:not(:nth-child(${index + 1}))`
+            const me = `.img-container .img:nth-child(${index + 1})`
+            const imageAnimation = gsap.timeline()
+                .to(exceptMe,{height:0,filter:'brightness(0.4)',onComplete:()=>{
+                        gsap.set(me, {zIndex: ++count})
+                    }})
+                .set(me,{height:'100%'},0)
+                .to(me,{filter:'brightness(1)'},0.5)
+
+
+
+            const navAnimation = gsap.timeline({
+                defaults:{
+                    duration:0.2
+                }
+            })
+                .to(listArr,{opacity:0.2})
+                .to(listArr,{opacity:1},0)
+
+
+        })
+
+        list.addEventListener('mouseleave',()=>{
+
         })
     })
-    imagesArr.forEach((image,index)=>{
 
-    })
+
+
+
+
+
+
+
+
 }
 const contactAni = () => {
     const footer = document.querySelector('.footer')
