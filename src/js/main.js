@@ -72,8 +72,6 @@ const ImgStarAni = () => {
         .to(star, {
             y: -20,
             ease: "power3.inOut",
-            repeat: -1,
-            yoyo: true,
         }, "+=0.2")
     return animation
 }
@@ -178,17 +176,20 @@ function init() {
 
 
 const homeAni = () => {
-    const nav = document.querySelector('.sticky-header')
-
     const timeline = gsap.timeline()
+        .to('.section1 .word-inner',{filter:"blur(10px)",scale:0.4})
         .to('.img-star', {
             rotation: 360,
             scale: 100,
-        })
+        },0)
+        .to('.section1 > .text-wrapper',{autoAlpha:1})
+
     ScrollTrigger.create({
         trigger: '.section1',
         start: 'top top',
+        bottom:'+=2000',
         pin: true,
+        markers:true,
         pinSpacing: true,
         scrub: true,
         animation: timeline,
