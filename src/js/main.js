@@ -191,8 +191,11 @@ function init() {
 
 
 const homeAni = () => {
+    gsap.set('.text-layout-center',{autoAlpha:1})
     const timeline = gsap.timeline()
+
         .to('.section1 .word-inner', {filter: "blur(10px)", scale: 0.4})
+
         .to('.img-star', {
             rotation: 360,
             scale: 100,
