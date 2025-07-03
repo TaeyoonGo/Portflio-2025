@@ -68,10 +68,13 @@ const ImgStarAni = () => {
     gsap.set(star, {opacity: 0})
     const animation = gsap.timeline()
 
-    animation.to(star, {opacity: 1})
+    animation
+        .to(star, {opacity: 1})
         .to(star, {
             y: -20,
             ease: "power3.inOut",
+            repeat:-1,
+            yoyo:true,
         }, "+=0.2")
     return animation
 }
@@ -182,7 +185,10 @@ const homeAni = () => {
             rotation: 360,
             scale: 100,
         },0)
-        .to('.section1 > .text-wrapper',{autoAlpha:1})
+        .from('.text-layout-center .title',{y:50,duration:0.8, opacity:0})
+        .from('.text-layout-center .desc',{y:50,duration:0.8, opacity:0})
+        .from('.text-layout-center a',{y:50,duration:0.8, opacity:0})
+
 
     ScrollTrigger.create({
         trigger: '.section1',
@@ -191,8 +197,9 @@ const homeAni = () => {
         pin: true,
         markers:true,
         pinSpacing: true,
-        scrub: true,
+        scrub: 0.5,
         animation: timeline,
+
     })
 }
 
@@ -320,8 +327,12 @@ const contactAni = () => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // document.scrollingElement.scrollTo(0, 0);
-    // smoother.paused(true);
+    document.scrollingElement.scrollTo(0, 0);
+    smoother.paused(true);
+    init();
+})
+
+document.addEventListener('resize', () => {
     init();
 })
 
