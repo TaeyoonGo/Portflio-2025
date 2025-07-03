@@ -1,6 +1,17 @@
 <!doctype html>
 <html lang="ko">
-@@include('./html/include/head.html')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="css/style.css" class="rel">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/brands.min.css">
+    <script type="module" src="./js/main.js"></script>
+</head>
+
 <body>
 <div id="cursor">
     <span>click</span>
@@ -20,7 +31,40 @@
         <li class="item"></li>
     </ul>
 </div>
-@@include('./html/include/header.html')
+<header class="sticky-header">
+    <div class="header-grid">
+        <div>
+            <h1 class="brand-logo">
+                <a href="/" class="">PORTFOLIO<em>TAEYOONGO</em></a>
+            </h1>
+        </div>
+        <nav>
+            <ul class="navi-list">
+                <li class="item">
+                    <span class="visible-cursor-show">Home</span>
+                    <div class="bar"></div>
+                </li>
+                <li class="item">
+                    <span class="visible-cursor-show">Character</span>
+                    <div class="bar"></div>
+                </li>
+                <li class="item">
+                    <span class="visible-cursor-show">Ability</span>
+                    <div class="bar"></div>
+                </li>
+                <li class="item">
+                    <span class="visible-cursor-show">Work</span>
+                    <div class="bar"></div>
+                </li>
+                <li class="item">
+                    <span class="visible-cursor-show">Contact</span>
+                    <div class="bar"></div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
 <div id="smooth-wrapper">
     <div id="smooth-content">
         <main class="main">
@@ -193,6 +237,42 @@
 
     </div>
 </div>
-@@include('./html/include/footer.html')
+<footer class="footer">
+    <ul class="contact-list">
+        <li class="item">
+            <span class="title">MAIL : </span>
+            <span class="contact">
+                    <a href="mailto:TAEYOONGO007@gmail.com">TAEYOONGO007@gmail.com</a>
+                </span>
+        </li>
+        <li class="item">
+            <span class="title">PHONE : </span>
+            <span class="contact">
+                  <a href="tel:010-9971-7063">010-9971-7063</a>
+                </span>
+        </li>
+        <li class="item">
+            <span class="title">SOCIAL : </span>
+            <span class="contact">
+                    <a href="https://www.instagram.com/taeyoon__go" target="_blank">
+                        <i class="fab fa-instagram" ></i>
+                    </a>
+                    <a href="https://github.com/TaeyoonGo" target="_blank">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                </span>
+        </li>
+        <li class="item">
+            <span class="title">Worked : </span>
+            <span class="contact">2020-2025</span>
+        </li>
+        <li class="item">
+                <span class="copy-right">
+                    © 2025 TAEYOONGO.<br/>All Rights Reserved.
+                </span>
+        </li>
+    </ul>
+</footer>
+
 </body>
 </html>
