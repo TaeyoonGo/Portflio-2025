@@ -73,8 +73,8 @@ const ImgStarAni = () => {
         .to(star, {
             y: -20,
             ease: "power3.inOut",
-            repeat:-1,
-            yoyo:true,
+            repeat: -1,
+            yoyo: true,
         }, "+=0.2")
     return animation
 }
@@ -94,20 +94,30 @@ const IntroMasterTimeline = () => {
 const navigation = () => {
     let navArr = gsap.utils.toArray('.navi-list > li')
     let header = document.querySelector('.sticky-header')
+    let sectionArr = gsap.utils.toArray('.section')
+    const scroll = sectionArr.map((section, index) => {
+        let scrollToEvent = ScrollTrigger.create({
+            trigger: section,
+            start: `top ${header.offsetHeight}px`,
+            end: `bottom ${header.offsetHeight}px`,
+        })
+        return scrollToEvent
+    })
 
-
-    navArr.forEach((item, index) => {
+    navArr.forEach((nav, index) => {
         const tl = gsap.timeline({paused: true})
-            // .to(item.querySelector('span'), {color: '#bbdde0'}, 0)
-            .to(item.querySelector('div'), {scaleX: 1, duration: 0.3}, 0)
-
-
-        item.addEventListener('mouseover', () => tl.play())
-        item.addEventListener('mouseleave', () => tl.reverse())
-        item.addEventListener('click', () => {
-
+            .to(nav.querySelector('span'), {color: '#e8e8e8'}, 0)
+            .to(nav.querySelector('div'), {scaleX: 1, duration: 0.3}, 0)
+        nav.addEventListener('mouseover', () => tl.play())
+        nav.addEventListener('mouseleave', () => tl.reverse())
+        nav.addEventListener('click', () => {
+            gsap.to(window, {duration: 1, scrollTo: scroll[index].start});
         })
     })
+
+    // sectionArr.forEach((section,index)=>{
+    //
+    // })
 
 
 }
@@ -169,33 +179,34 @@ function init() {
     Loading();
 
     mousePoint();
-    navigation();
+
 
     homeAni();
     abilityAni();
     workAni();
     contactAni();
+
+    navigation();
 }
 
 
 const homeAni = () => {
     const timeline = gsap.timeline()
-        .to('.section1 .word-inner',{filter:"blur(10px)",scale:0.4})
+        .to('.section1 .word-inner', {filter: "blur(10px)", scale: 0.4})
         .to('.img-star', {
             rotation: 360,
             scale: 100,
-        },0)
-        .from('.text-layout-center .title',{y:50,duration:0.8, opacity:0})
-        .from('.text-layout-center .desc',{y:50,duration:0.8, opacity:0})
-        .from('.text-layout-center a',{y:50,duration:0.8, opacity:0})
+        }, 0)
+        .from('.text-layout-center .title', {y: 50, duration: 0.8, opacity: 0})
+        .from('.text-layout-center .desc', {y: 50, duration: 0.8, opacity: 0})
+        .from('.text-layout-center a', {duration: 0.8, opacity: 0})
 
 
     ScrollTrigger.create({
         trigger: '.section1',
         start: 'top top',
-        bottom:'+=2000',
+        bottom: '+=2000',
         pin: true,
-        markers:true,
         pinSpacing: true,
         scrub: 0.5,
         animation: timeline,
@@ -241,10 +252,10 @@ const abilityAni = () => {
             gsap.fromTo(words,
                 {
                     skewX: `${scrollToVelocity / 100}deg`,
-                    duration:1,
+                    duration: 1,
                 }, {
                     skewX: 0,
-                    duration:1,
+                    duration: 1,
                 })
         },
     })
@@ -256,7 +267,7 @@ const workAni = () => {
     let count = 11;
 
     gsap.defaults({
-        overwrite:'auto'
+        overwrite: 'auto'
     })
 
     gsap.set(imagesArr, {
@@ -268,42 +279,35 @@ const workAni = () => {
     })
 
 
-
-    listArr.forEach((list,index)=>{
-        list.addEventListener('mouseover',()=>{
+    listArr.forEach((list, index) => {
+        list.addEventListener('mouseover', () => {
             const exceptMe = `.img-container .img:not(:nth-child(${index + 1}))`
             const me = `.img-container .img:nth-child(${index + 1})`
             const imageAnimation = gsap.timeline()
-                .to(exceptMe,{height:0,filter:'brightness(0.4)',onComplete:()=>{
+                .to(exceptMe, {
+                    height: 0, filter: 'brightness(0.4)', onComplete: () => {
                         gsap.set(me, {zIndex: ++count})
-                    }})
-                .set(me,{height:'100%'},0)
-                .to(me,{filter:'brightness(1)'},0.5)
-
+                    }
+                })
+                .set(me, {height: '100%'}, 0)
+                .to(me, {filter: 'brightness(1)'}, 0.5)
 
 
             const navAnimation = gsap.timeline({
-                defaults:{
-                    duration:0.2
+                defaults: {
+                    duration: 0.2
                 }
             })
-                .to(listArr,{opacity:0.2})
-                .to(listArr,{opacity:1},0)
+                .to(listArr, {opacity: 0.2})
+                .to(listArr, {opacity: 1}, 0)
 
 
         })
 
-        list.addEventListener('mouseleave',()=>{
+        list.addEventListener('mouseleave', () => {
 
         })
     })
-
-
-
-
-
-
-
 
 
 }
