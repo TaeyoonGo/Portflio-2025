@@ -6,7 +6,7 @@
 
 ## 개발환경
 - Gulp 환경에서 작업 진행
-- GitPage 배포
+- firebase 배포
 
 ## 파일 구조
 - dist : 배포용 파일 
