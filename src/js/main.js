@@ -225,12 +225,13 @@ const characterAni = () => {
                 return gsap.from(instance.lines, {
                     duration: 1,
                     y: 100,
-                    stagger: 0.5,
+                    stagger: 1,
                     scrollTrigger: {
                         trigger: container,
                         scrub: true,
                         start: "clamp(top center)",
                         end: "clamp(bottom center)",
+                        once:true,
                     },
 
                 });
