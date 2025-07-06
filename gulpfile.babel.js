@@ -43,7 +43,7 @@ const routers = {
     }
 }
 
-const clean = () => deleteAsync(['dist',".publish"])
+const clean = () => deleteAsync(['dist',".publish","pglite-debug.log"])
 
 const webServer = () => gulp.src(['dist']).pipe(ws({livereload: true,open:true,port:3030}))
 
@@ -86,4 +86,4 @@ const live = gulp.parallel([webServer,watch])
 
 export const build = gulp.series([prepare,assets])
 export const dev = gulp.series([build,live])
-export const deploy = gulp.series([build,gh,clean])
+export const deploy = gulp.series([build])
