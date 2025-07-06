@@ -129,6 +129,8 @@ const navigation = () => {
 }
 
 const Loading = () => {
+    window.scrollTo(0,0)
+    smoother.paused(true);
     const lottie = Lottie.loadAnimation({
         container: document.querySelector('#lottie'),
         loop: true,
@@ -136,9 +138,8 @@ const Loading = () => {
         path: '/lottie/loading.json'
     });
     const imgAll = gsap.utils.toArray('img')
+
     const updateProgress = (instance) => {
-        window.scrollTo(0,0)
-        smoother.paused(true);
         let numberPercent = instance.progressedCount / imgAll.length
         const loaderText = document.querySelector('.loader-text')
         loaderText.textContent = `${Math.round(numberPercent * 100)}%`
@@ -150,6 +151,8 @@ const Loading = () => {
         .on('progress', updateProgress)
         .on('always', IntroMasterTimeline)
 }
+
+
 
 const mousePoint = () => {
     const cursor = document.querySelector('#cursor');
@@ -377,8 +380,8 @@ document.addEventListener('DOMContentLoaded', () => {
     init();
 })
 
-document.addEventListener('resize',()=>{
-    console.log('hello')
+document.addEventListener('load',()=>{
+    Loading()
 })
 
 
