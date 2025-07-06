@@ -95,7 +95,7 @@ const navigation = () => {
     let navArr = gsap.utils.toArray('.navi-list > li')
     let header = document.querySelector('.sticky-header')
     let sectionArr = gsap.utils.toArray('.section')
-    const scroll = sectionArr.map((section, index) => {
+    const scroll = sectionArr.map((section, _) => {
         let scrollToEvent = ScrollTrigger.create({
             trigger: section,
             start: `top ${header.offsetHeight}px`,
@@ -104,16 +104,21 @@ const navigation = () => {
         return scrollToEvent
     })
 
+
     navArr.forEach((nav, index) => {
         const tl = gsap.timeline({paused: true})
-            .to(nav.querySelector('span'), {color: '#e8e8e8'}, 0)
+            .to(nav.querySelector('span'), {color: '#e8e8e8', delay: 0}, 0)
             .to(nav.querySelector('div'), {scaleX: 1, duration: 0.3}, 0)
+
+
         nav.addEventListener('mouseover', () => tl.play())
         nav.addEventListener('mouseleave', () => tl.reverse())
         nav.addEventListener('click', () => {
             gsap.to(window, {duration: 1, scrollTo: scroll[index].start});
         })
+
     })
+
 }
 
 const Loading = () => {
@@ -238,8 +243,7 @@ const characterAni = () => {
     // })
 
 
-
-    gsap.set(".content-lists .list p", { opacity: 1 });
+    gsap.set(".content-lists .list p", {opacity: 1});
 
     document.fonts.ready.then(() => {
         let containers = gsap.utils.toArray(".content-lists .list");
@@ -255,11 +259,11 @@ const characterAni = () => {
                         y: 200,
                         scrollTrigger: {
                             trigger: container,
-                            markers: true,
+                            // markers: true,
                             scrub: true,
                             start: "clamp(top center)",
                             end: "clamp(bottom center)",
-                            once:true,
+                            once: true,
                         }
                     });
                 }
@@ -268,13 +272,7 @@ const characterAni = () => {
     });
 
 
-
-
-
-
-
 }
-
 
 
 const abilityAni = () => {
