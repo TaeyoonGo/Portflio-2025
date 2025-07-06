@@ -137,6 +137,8 @@ const Loading = () => {
     });
     const imgAll = gsap.utils.toArray('img')
     const updateProgress = (instance) => {
+        window.scrollTo(0,0)
+        smoother.paused(true);
         let numberPercent = instance.progressedCount / imgAll.length
         const loaderText = document.querySelector('.loader-text')
         loaderText.textContent = `${Math.round(numberPercent * 100)}%`
@@ -371,8 +373,7 @@ const contactAni = () => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.scrollingElement.scrollTo(0, 0);
-    smoother.paused(true);
+
     init();
 })
 
