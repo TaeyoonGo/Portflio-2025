@@ -114,12 +114,6 @@ const navigation = () => {
             gsap.to(window, {duration: 1, scrollTo: scroll[index].start});
         })
     })
-
-    // sectionArr.forEach((section,index)=>{
-    //
-    // })
-
-
 }
 
 const Loading = () => {
@@ -177,16 +171,13 @@ const circleAni = () => {
 
 function init() {
     Loading();
-
     mousePoint();
-
-
     homeAni();
     abilityAni();
     workAni();
     contactAni();
-
     navigation();
+    characterAni();
 }
 
 
@@ -198,7 +189,7 @@ const homeAni = () => {
             rotation: 360,
             scale: 100,
         }, 0)
-        .to( '.text-layout-center',{autoAlpha:1},0)
+        .to('.text-layout-center', {autoAlpha: 1}, 0)
         .from('.text-layout-center .title', {y: 50, duration: 0.8, opacity: 0})
         .from('.text-layout-center .desc', {y: 50, duration: 0.8, opacity: 0})
         .from('.text-layout-center a', {duration: 0.8, opacity: 0})
@@ -215,6 +206,76 @@ const homeAni = () => {
 
     })
 }
+
+const characterAni = () => {
+
+    // const split = new SplitText(".content-lists .list p", {
+    //     autoSplit: true,
+    //     type: 'lines',
+    //     onSplit(self){
+    //         return gsap.from(self.lines,{
+    //             opacity: 0,
+    //             filter: 'blur(10px)',
+    //             y: 200,
+    //         })
+    //     }
+    //
+    // })
+    // const splitCover = new SplitText(".content-lists .list p", {type: 'lines', linesClass: 'cover'})
+    // split.lines.forEach((lines, index) => {
+    //     ScrollTrigger.create({
+    //         trigger: splitCover.lines[index],
+    //         start: 'top 90%',
+    //         end: 'bottom center',
+    //         id: 'text',
+    //         animation: gsap.from(lines, {
+    //             opacity: 0,
+
+    //         }),
+    //         markers: true,
+    //         scrub:true,
+    //     })
+    // })
+
+
+
+    gsap.set(".content-lists .list p", { opacity: 1 });
+
+    document.fonts.ready.then(() => {
+        let containers = gsap.utils.toArray(".content-lists .list");
+        containers.forEach((container) => {
+            let text = container.querySelector(".content-lists .list p");
+            SplitText.create(text, {
+                type: "lines",
+                mask: "lines",
+                autoSplit: true,
+                onSplit: (instance) => {
+                    return gsap.from(instance.lines, {
+                        filter: 'blur(10px)',
+                        y: 200,
+                        scrollTrigger: {
+                            trigger: container,
+                            markers: true,
+                            scrub: true,
+                            start: "clamp(top center)",
+                            end: "clamp(bottom center)",
+                            once:true,
+                        }
+                    });
+                }
+            });
+        });
+    });
+
+
+
+
+
+
+
+}
+
+
 
 const abilityAni = () => {
     // 1. 부모 요소를 pin 고정 후 레이아웃 움직이지 못하게
@@ -305,10 +366,6 @@ const workAni = () => {
 
 
         })
-
-        list.addEventListener('mouseleave', () => {
-
-        })
     })
 
 
@@ -338,9 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
     init();
 })
 
-document.addEventListener('resize', () => {
-    init();
-})
+
 
 
 
