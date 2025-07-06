@@ -11,6 +11,12 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, ScrollToPlugin);
 const tl = gsap.timeline();
 const mm = gsap.matchMedia();
 
+const mmOption ={
+    isMobile : '(max-width:991px)',
+    isDesktop : '(min-width:501px)'
+}
+
+
 let smoother = ScrollSmoother.create({
     smooth: 2,
     effects: true,
@@ -73,8 +79,6 @@ const ImgStarAni = () => {
         .to(star, {
             y: -20,
             ease: "power3.inOut",
-            repeat: -1,
-            yoyo: true,
         }, "+=0.2")
     return animation
 }
@@ -95,6 +99,10 @@ const navigation = () => {
     let navArr = gsap.utils.toArray('.navi-list > li')
     let header = document.querySelector('.sticky-header')
     let sectionArr = gsap.utils.toArray('.section')
+
+
+
+
     const scroll = sectionArr.map((section, _) => {
         let scrollToEvent = ScrollTrigger.create({
             trigger: section,
@@ -103,7 +111,6 @@ const navigation = () => {
         })
         return scrollToEvent
     })
-
 
     navArr.forEach((nav, index) => {
         const tl = gsap.timeline({paused: true})
@@ -147,6 +154,7 @@ const mousePoint = () => {
     const body = document.querySelector('body')
     const visibleArr = gsap.utils.toArray('.visible-cursor-show');
 
+
     let xTo = gsap.quickTo(cursor, "x", {duration: 0.4, ease: 'power3'})
     let yTo = gsap.quickTo(cursor, "y", {duration: 0.4, ease: 'power3'})
 
@@ -163,6 +171,15 @@ const mousePoint = () => {
         show.addEventListener('mouseleave', () => {
             cursor.style.mixBlendMode = 'difference';
             gsap.to(cursor.querySelector('span'), {autoAlpha: 0})
+        })
+    })
+
+
+    mm.add(mmOption,(ctx)=>{
+
+        const {isMobile,isDesktop} = ctx.conditions;
+        gsap.to('#cursor',{
+
         })
     })
 
@@ -344,8 +361,8 @@ const contactAni = () => {
     ScrollTrigger.create({
         ease: 'none',
         trigger: '.section5',
-        start: '40% center',
-        end: 'center center',
+        start: 'top center',
+        end: 'max',
         animation: animation,
         toggleActions: "play play reverse reverse"
 
@@ -357,6 +374,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.scrollingElement.scrollTo(0, 0);
     smoother.paused(true);
     init();
+})
+
+document.addEventListener('resize',()=>{
+    console.log('hello')
 })
 
 

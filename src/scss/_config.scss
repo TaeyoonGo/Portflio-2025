@@ -7,3 +7,18 @@
 @function rem($px, $base: var.$base-rem-size) {
     @return remove-unit(calc($px / $base)) * 1rem;
 }
+
+
+@mixin mo-res {
+    @media (min-width: 0px) and (max-width: #{var.$table-size}) {
+        @content;
+    }
+}
+
+@mixin tablet-res {
+    @media (min-width: 0px) and (max-width: #{var.$pc-size}) {
+        @content;
+    }
+}
+
+

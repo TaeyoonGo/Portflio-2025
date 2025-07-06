@@ -1,9 +1,11 @@
 @use 'config';
 @use 'variables' as var;
-#container{
+
+#container {
     height: 100vh;
 }
-#cursor{
+
+#cursor {
     width: config.rem(60);
     height: config.rem(60);
     background-color: var.$color-white;;
@@ -14,7 +16,8 @@
     left: 0;
     top: 0;
     mix-blend-mode: difference;
-    span{
+
+    span {
         visibility: hidden;
         position: absolute;
         top: 50%;
@@ -26,8 +29,12 @@
         color: var.$color-black;;
     }
 
+    @include config.tablet-res {
+        display: none;
+    }
 }
-.splash-loader-box{
+
+.splash-loader-box {
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -37,10 +44,12 @@
     right: 0;
     bottom: 0;
     z-index: 102;
+
     .splash-screen {
         display: flex;
         width: 100%;
         height: 100%;
+
         .item {
             width: 20%;
             height: 100%;
@@ -48,15 +57,17 @@
         }
 
     }
-    .progress-box{
+
+    .progress-box {
         position: absolute;
         top: 50%;
         left: 50%;
         opacity: 1;
         visibility: inherit;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         z-index: 13;
-        p{
+
+        p {
             text-align: center;
             font-weight: var.$font-weight-semi-bold;
             color: var.$color-black;;
@@ -67,28 +78,32 @@
 }
 
 
-.sticky-header{
+.sticky-header {
     position: fixed;
     left: 0;
     width: 100%;
     background-color: var.$color-white-200;;
     z-index: 101;
     transform: translateY(config.rem(-90));
-    .header-grid{
+
+    .header-grid {
         display: flex;
         justify-content: space-between;
         align-content: center;
         padding: config.rem(32) config.rem(40);
     }
-    .navi-list{
+
+    .navi-list {
         display: flex;
         gap: config.rem(24);
-        .item{
+
+        .item {
             cursor: pointer;
             font-weight: var.$font-weight-semi-bold;
             font-size: config.rem(24);
             position: relative;
-            .bar{
+
+            .bar {
                 bottom: config.rem(-6);
                 left: 0;
                 position: absolute;
@@ -99,19 +114,22 @@
             }
         }
     }
-    .brand-logo{
+
+    .brand-logo {
         top: 50%;
         transform: translateY(-50%);
         left: config.rem(40);
         position: absolute;
-        a{
+
+        a {
             font-weight: 700;
             color: var.$color-black;;
             font-size: config.rem(32);
             text-align: center;
             text-decoration: none;
         }
-        em{
+
+        em {
             font-weight: 500;
             color: inherit;
             font-size: config.rem(18);
@@ -119,33 +137,34 @@
         }
     }
 }
-.section{
+
+.section {
     width: 100vw;
     height: 100vh;
     position: relative;
-    &.section1{
-        h2{
-            margin:0;
-            font-size: 5vw;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%,-50%);
-        }
+
+    &.section1 {
         background-color: var.$color-white-300;
-        .word-outer{
+
+        .word-outer {
             width: 100%;
             height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .word-inner{
+
+        .word-inner {
             color: var.$color-black;;
             font-weight: var.$font-weight-black-bold;
             font-size: config.rem(128);
+            @include config.tablet-res {
+                text-align: center;
+                font-size: config.rem(90);
+            }
         }
-        .img-star{
+
+        .img-star {
             position: absolute;
             z-index: 1;
             bottom: config.rem(30);
@@ -153,12 +172,14 @@
             transform: translate(-50%);
             width: config.rem(90);
             height: config.rem(80);
-            img{
+
+            img {
                 width: 100%;
                 height: 100%;
             }
         }
-        .text-wrapper{
+
+        .text-wrapper {
             position: fixed;
             top: 0;
             left: 0;
@@ -166,7 +187,8 @@
             right: 0;
             bottom: 0;
             font-size: config.rem(24);
-            .text-layout-center{
+
+            .text-layout-center {
                 visibility: hidden;
                 width: 100%;
                 height: 100%;
@@ -175,27 +197,38 @@
                 justify-content: center;
                 text-align: center;
             }
-            .title{
+
+            .title {
                 font-size: config.rem(64);
                 font-weight: var.$font-weight-semi-bold;
                 margin-bottom: config.rem(20);
+                @include config.tablet-res {
+                    font-size: config.rem(40);
+                }
             }
-            .desc{
+
+            .desc {
                 font-size: config.rem(24);
                 margin-bottom: config.rem(20);
+                @include config.tablet-res {
+                    font-size: config.rem(20);
+                }
             }
-            a{
+
+            a {
                 text-decoration: none;
                 color: var.$color-black;;
             }
         }
     }
-    &.section2{
+
+    &.section2 {
         overflow: visible;
         background-color: var.$color-white-300;
         color: var.$color-black;;
         height: auto;
-        .inner-character{
+
+        .inner-character {
             position: relative;
             //min-width: config.rem(1280);
             margin: 0 auto;
@@ -204,7 +237,11 @@
             display: flex;
             justify-content: space-between;
             gap: config.rem(64);
-            h2{
+            @include config.tablet-res {
+                flex-direction: column;
+            }
+
+            h2 {
 
                 font-weight: var.$font-weight-black-bold;
                 line-height: 1.3;
@@ -213,96 +250,124 @@
                 font-size: 4vw;
                 height: 5vw;
                 border-bottom: 0.4vw solid var.$color-white-100;;
-                em{
+
+                em {
                     margin-left: config.rem(24);
                     font-size: config.rem(24);
                 }
             }
         }
-        .content-lists{
+
+        .content-lists {
             flex: 1 1 48%;
-            .list{
-                span{
+
+            .list {
+                span {
                     font-size: 5vw;
                     font-weight: var.$font-weight-black-bold;
                     line-height: 1.3;
                 }
-                h3{
+
+                h3 {
                     font-size: config.rem(32);
                     font-weight: var.$font-weight-semi-bold;
                     margin-bottom: 1vw;
                 }
-                p{
+
+                p {
                     font-size: config.rem(20);
                     line-height: 1.3;
-                    margin-bottom: 20vh;
+                    margin-bottom: 20dvh;
+                    @include config.tablet-res {
+                        margin-bottom: 10dvh;
+                    }
                 }
 
             }
         }
     }
-    &.section3{
-        .word-container{
+
+    &.section3 {
+        .word-container {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
         }
-        .word-outer{
+
+        .word-outer {
             width: 100%;
             height: 100%;
         }
-        .word-inner{
+
+        .word-inner {
             gap: 3vw;
             display: flex;
-            *{
+
+            * {
                 font-weight: var.$font-weight-black-bold;
                 font-size: 6vw
             }
         }
     }
-    &.section4{
+
+    &.section4 {
         background-color: var.$color-white-300;
-        .work-container{
+
+        .work-container {
             gap: config.rem(30);
             padding: config.rem(40);
             display: flex;
             justify-content: space-between;
+            @include config.tablet-res {
+                flex-direction: column;
+            }
         }
-        .img-container{
+
+        .img-container {
             flex: 1 1 100%;
             position: relative;
-            .img{
+            @include config.tablet-res {
+                flex: 1 1 config.rem(500);
+            }
+
+            .img {
                 position: absolute;
                 top: 0;
                 left: 0;
                 width: 100%;
                 height: 100%;
                 filter: brightness(0.4);
-                img{
+
+                img {
                     width: 100%;
                     height: 100%;
                 }
             }
 
         }
-        .text-container{
+
+        .text-container {
             flex: 1 1 100%;
             color: var.$color-black;;
-            a{
+
+            a {
                 color: inherit;
             }
-            .work-text-box{
-                li{
+
+            .work-text-box {
+                li {
                     display: flex;
                     padding: config.rem(20) 0;
                     border-bottom: config.rem(1) solid var.$color-black;;
-                    span{
-                        &:first-child{
+
+                    span {
+                        &:first-child {
                             flex: 0 0 15%;
                             font-weight: var.$font-weight-semi-bold;
                         }
                     }
-                    a{
+
+                    a {
                         margin-left: auto;
                     }
                 }
@@ -311,9 +376,11 @@
         }
 
     }
-    &.section5{
+
+    &.section5 {
         background-color: var.$color-white;
-        .contact-box{
+
+        .contact-box {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -321,54 +388,84 @@
             width: 100%;
             height: 100%;
             gap: config.rem(4);
-            .badge{
+
+            .badge {
                 border-radius: config.rem(26);
                 padding: config.rem(15) config.rem(30);
                 color: var.$color-black;;
                 font-size: config.rem(24);
                 border: 1px solid var.$color-black;;
+                @include config.tablet-res {
+                    margin-bottom: config.rem(24);
+                }
             }
-            .title{
 
+            .title {
+                text-align: center;
                 font-size: config.rem(120);
                 color: var.$color-black;;
                 font-weight: 700;
+                @include config.tablet-res {
+                    font-size: config.rem(90);
+                }
             }
         }
 
     }
 
 }
-.footer{
+
+.footer {
     height: config.rem(160);
     background-color: var.$color-white-200;;
     position: fixed;
     bottom: 0;
     width: 100%;
     left: 0;
+    @include config.tablet-res {
+        height: auto;
+    }
+
     .contact-list {
         padding: 0 config.rem(40);
         height: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        @include config.tablet-res {
+            flex-direction: column;
+            gap: config.rem(16);
+            padding: config.rem(20);
+        }
+
         .item {
             color: var.$color-black;;
+
             .title {
                 font-size: config.rem(32);
                 display: block;
                 font-weight: 700;
-                margin-bottom: config.rem(16)
+                margin-bottom: config.rem(16);
+                @include config.tablet-res {
+                    font-size: config.rem(24);
+                    text-align: center;
+                    margin-bottom: config.rem(10);
+                }
+
             }
 
             .copy-right {
                 color: var.$color-black;;
                 font-size: config.rem(14);
                 line-height: 1.2;
+                @include config.tablet-res{
+                    text-align: center;
+                }
             }
 
             .contact {
                 font-size: config.rem(18);
+
                 a {
                     text-decoration: none;
                     color: var.$color-black;;
@@ -377,9 +474,11 @@
             }
         }
     }
-    i{
+
+    i {
         font-size: config.rem(32);
-        &:first-child{
+
+        &:first-child {
             margin-right: config.rem(10);
         }
     }
