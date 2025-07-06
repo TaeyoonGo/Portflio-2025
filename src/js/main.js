@@ -129,8 +129,10 @@ const navigation = () => {
 }
 
 const Loading = () => {
-    window.scrollTo(0,0)
+    gsap.to(window, { duration: 0, scrollTo: { y: 0, x: 0 }, ease: "none" });
     smoother.paused(true);
+
+
     const lottie = Lottie.loadAnimation({
         container: document.querySelector('#lottie'),
         loop: true,
@@ -375,14 +377,11 @@ const contactAni = () => {
 }
 
 
-document.addEventListener('DOMContentLoaded', () => {
+// document.addEventListener('DOMContentLoaded',resetScroll)
+document.addEventListener('DOMContentLoaded',init)
 
-    init();
-})
 
-document.addEventListener('load',()=>{
-    Loading()
-})
+
 
 
 
