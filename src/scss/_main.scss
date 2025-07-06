@@ -197,6 +197,7 @@
         color: #000;
         height: auto;
         .inner-character{
+            position: relative;
             //min-width: config.rem(1280);
             margin: 0 auto;
             line-height: 1.3;

@@ -213,65 +213,30 @@ const homeAni = () => {
 }
 
 const characterAni = () => {
-
-    // const split = new SplitText(".content-lists .list p", {
-    //     autoSplit: true,
-    //     type: 'lines',
-    //     onSplit(self){
-    //         return gsap.from(self.lines,{
-    //             opacity: 0,
-    //             filter: 'blur(10px)',
-    //             y: 200,
-    //         })
-    //     }
-    //
-    // })
-    // const splitCover = new SplitText(".content-lists .list p", {type: 'lines', linesClass: 'cover'})
-    // split.lines.forEach((lines, index) => {
-    //     ScrollTrigger.create({
-    //         trigger: splitCover.lines[index],
-    //         start: 'top 90%',
-    //         end: 'bottom center',
-    //         id: 'text',
-    //         animation: gsap.from(lines, {
-    //             opacity: 0,
-
-    //         }),
-    //         markers: true,
-    //         scrub:true,
-    //     })
-    // })
-
-
     gsap.set(".content-lists .list p", {opacity: 1});
+    let containers = gsap.utils.toArray(".content-lists .list");
+    containers.forEach((container) => {
+        let text = container.querySelector(".content-lists .list p");
+        SplitText.create(text, {
+            type: "lines",
+            mask: "lines",
+            autoSplit: true,
+            onSplit: (instance) => {
+                return gsap.from(instance.lines, {
+                    duration: 1,
+                    y: 100,
+                    stagger: 0.5,
+                    scrollTrigger: {
+                        trigger: container,
+                        scrub: true,
+                        start: "clamp(top center)",
+                        end: "clamp(bottom center)",
+                    },
 
-    document.fonts.ready.then(() => {
-        let containers = gsap.utils.toArray(".content-lists .list");
-        containers.forEach((container) => {
-            let text = container.querySelector(".content-lists .list p");
-            SplitText.create(text, {
-                type: "lines",
-                mask: "lines",
-                autoSplit: true,
-                onSplit: (instance) => {
-                    return gsap.from(instance.lines, {
-                        filter: 'blur(10px)',
-                        y: 200,
-                        scrollTrigger: {
-                            trigger: container,
-                            // markers: true,
-                            scrub: true,
-                            start: "clamp(top center)",
-                            end: "clamp(bottom center)",
-                            once: true,
-                        }
-                    });
-                }
-            });
+                });
+            }
         });
     });
-
-
 }
 
 
