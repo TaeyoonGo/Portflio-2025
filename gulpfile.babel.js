@@ -19,35 +19,35 @@ const routers = {
     html :{
         watch : 'src/**/*.html',
         src : 'src/*.html',
-        dest : 'dist',
+        dest : 'docs',
     },
     img:{
         watch : 'src/img/**/*',
         src : 'src/img/*',
-        dest : 'dist/img'
+        dest : 'docs/img'
     },
     scss : {
         watch: 'src/scss/**/*.scss',
         src : 'src/scss/style.scss',
-        dest : 'dist/css'
+        dest : 'docs/css'
     },
     js : {
         watch : 'src/js/**/*.js',
         src : "src/js/*",
-        dest: "dist/js"
+        dest: "docs/js"
     },
     lottie : {
         watch : 'src/lottie/**/*',
         src : 'src/lottie/*',
-        dest : 'dist/lottie'
+        dest : 'docs/lottie'
     }
 }
 
-const clean = () => deleteAsync(['dist',".publish"])
+const clean = () => deleteAsync(['docs',".publish"])
 
-const webServer = () => gulp.src(['dist']).pipe(ws({livereload: true,open:true,port:3030}))
+const webServer = () => gulp.src(['docs']).pipe(ws({livereload: true,open:true,port:3030}))
 
-const gh = () => gulp.src("dist/**/*").pipe(ghpages());
+const gh = () => gulp.src("docs/**/*").pipe(ghpages());
 
 const watch = () => {
     gulp.watch(routers.html.watch,html)
