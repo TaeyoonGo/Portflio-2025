@@ -11,9 +11,9 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, ScrollToPlugin);
 const tl = gsap.timeline();
 const mm = gsap.matchMedia();
 
-const mmOption ={
-    isMobile : '(max-width:991px)',
-    isDesktop : '(min-width:501px)'
+const mmOption = {
+    isMobile: '(max-width:991px)',
+    isDesktop: '(min-width:501px)'
 }
 
 
@@ -101,8 +101,6 @@ const navigation = () => {
     let sectionArr = gsap.utils.toArray('.section')
 
 
-
-
     const scroll = sectionArr.map((section, _) => {
         let scrollToEvent = ScrollTrigger.create({
             trigger: section,
@@ -129,7 +127,7 @@ const navigation = () => {
 }
 
 const Loading = () => {
-    gsap.to(window, { duration: 0, scrollTo: { y: 0, x: 0 }, ease: "none" });
+    gsap.to(window, {duration: 0, scrollTo: {y: 0, x: 0}, ease: "none"});
     smoother.paused(true);
 
 
@@ -153,7 +151,6 @@ const Loading = () => {
         .on('progress', updateProgress)
         .on('always', IntroMasterTimeline)
 }
-
 
 
 const mousePoint = () => {
@@ -182,11 +179,9 @@ const mousePoint = () => {
     })
 
 
-    mm.add(mmOption,(ctx)=>{
-        const {isMobile,isDesktop} = ctx.conditions;
-        gsap.to('#cursor',{
-
-        })
+    mm.add(mmOption, (ctx) => {
+        const {isMobile, isDesktop} = ctx.conditions;
+        gsap.to('#cursor', {})
     })
 
 
@@ -210,16 +205,21 @@ function init() {
 
 
 const homeAni = () => {
-    gsap.set('.text-layout-center',{autoAlpha:0})
-    gsap.set('.text-layout-center .stagger', {filter: "blur(10px)",transform:'scale(0.8)'})
+    gsap.set('.text-layout-center', {autoAlpha: 0})
+    gsap.set('.text-layout-center .stagger', {filter: "blur(10px)", transform: 'scale(0.8)'})
     const timeline = gsap.timeline()
         .to('.section1 .word-inner', {filter: "blur(10px)", scale: 1})
         .to('.img-star', {
             rotation: 360,
             scale: 100,
         }, 0)
-        .to('.text-layout-center',{autoAlpha:1})
-        .to('.text-layout-center .stagger', {filter: "blur(0px)",duration: 0.8,transform:'scale(1)'})
+        .to('.text-layout-center', {autoAlpha: 1})
+        .to('.text-layout-center .stagger', {
+            filter: "blur(0px)", duration: 0.8, transform: 'scale(1)', stagger: {
+                each: 0.5,
+                ease:'power3.inOut'
+            }
+        })
 
 
     ScrollTrigger.create({
@@ -253,7 +253,7 @@ const characterAni = () => {
                         scrub: true,
                         start: "clamp(top center)",
                         end: "clamp(bottom center)",
-                        once:true,
+                        once: true,
                     },
 
                 });
@@ -288,7 +288,7 @@ const abilityAni = () => {
         end: "+=3000px",
         // pinnedContainer:'.section3',
         pin: true,
-        markers:true,
+        markers: true,
         animation,
         scrub: true,
         onUpdate: ({progress, getVelocity}) => {
@@ -378,7 +378,7 @@ const contactAni = () => {
 
 
 // document.addEventListener('DOMContentLoaded',resetScroll)
-document.addEventListener('DOMContentLoaded',init)
+document.addEventListener('DOMContentLoaded', init)
 
 
 
