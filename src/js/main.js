@@ -138,6 +138,14 @@ const Loading = () => {
     const imgAll = gsap.utils.toArray('img')
 
     const updateProgress = (instance) => {
+        const grid = document.querySelector('.grid');
+        new Masonry( grid, {
+            itemSelector: '.grid-item',
+            columnWidth: 600,
+            fitWidth: true,
+            gutter: 30
+        });
+
         let numberPercent = instance.progressedCount / imgAll.length
         const loaderText = document.querySelector('.loader-text')
         loaderText.textContent = `${Math.round(numberPercent * 100)}%`
@@ -331,13 +339,9 @@ const abilityAni = () => {
 }
 
 const workAni = () => {
-    const grid = document.querySelector('.grid');
     const gridArr = gsap.utils.toArray('.grid-item')
-    new Masonry( grid, {
-        itemSelector: '.grid-item',
-        columnWidth: 200,
-        fitWidth: true,
-    });
+
+
     gridArr.forEach((item,index)=>{
         // console.log(item[0].data('title'))
 
