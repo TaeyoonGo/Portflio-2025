@@ -74,12 +74,8 @@ const ImgStarAni = () => {
     gsap.set(star, {opacity: 0})
     const animation = gsap.timeline()
 
-    animation
-        .to(star, {opacity: 1})
-        .to(star, {
-            y: -20,
-            ease: "power3.inOut",
-        }, "+=0.2")
+    animation.to(star, {opacity: 1})
+
     return animation
 }
 
@@ -288,7 +284,6 @@ const abilityAni = () => {
         end: "+=3000px",
         // pinnedContainer:'.section3',
         pin: true,
-        markers: true,
         animation,
         scrub: true,
         onUpdate: ({progress, getVelocity}) => {

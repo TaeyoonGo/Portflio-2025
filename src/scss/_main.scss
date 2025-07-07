@@ -318,7 +318,7 @@
     }
 
     &.section4 {
-        background-color: var.$color-white-300;
+        background-color: var.$color-black;
         @include config.tablet-res{
             height: auto;
         }
@@ -357,7 +357,7 @@
 
         .text-container {
             flex: 1 1 100%;
-            color: var.$color-black;;
+            color: var.$color-white;;
 
             a {
                 color: inherit;
@@ -367,7 +367,7 @@
                 li {
                     display: flex;
                     padding: config.rem(20) 0;
-                    border-bottom: config.rem(1) solid var.$color-black;;
+                    border-bottom: config.rem(1) solid var.$color-white;
 
                     span {
                         &:first-child {
