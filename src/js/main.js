@@ -251,11 +251,31 @@ const characterAni = () => {
                         end: "clamp(bottom center)",
                         once: true,
                     },
-
                 });
             }
         });
+
+
     });
+
+
+    ScrollTrigger.create({
+        trigger:'.section2',
+        start:`top ${document.querySelector('.sticky-header').offsetHeight}`,
+        end:'bottom bottom',
+        animation:gsap.to('.character-title',{
+            ease:'none',
+            y: () => {
+                const child = document.querySelector('.list.last');
+                const parents = document.querySelector('.content-lists')
+                const childTop = child.getBoundingClientRect().top;
+                const parentTop = parents.getBoundingClientRect().top;
+                return (childTop - parentTop);
+            }
+        }),
+        markers:true,
+        scrub:true,
+    })
 }
 
 
@@ -266,7 +286,6 @@ const abilityAni = () => {
     const wordLayout = document.querySelector('.section3 .word-inner')
     const {words} = new SplitText(wordLayout, {type: 'words'})
 
-    console.log(wordLayout.scrollWidth - innerWidth)
     const animation = gsap.fromTo(words,
         {
             x: 0,
@@ -363,7 +382,6 @@ const contactAni = () => {
     ScrollTrigger.create({
         ease: 'none',
         trigger: '.section5',
-        markers:true,
         start: 'bottom bottom',
         end: 'bottom bottom',
         animation: animation,
