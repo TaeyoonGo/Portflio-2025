@@ -5,8 +5,10 @@ import {SplitText} from "gsap/dist/SplitText";
 import {ScrollToPlugin} from "gsap/dist/ScrollToPlugin"
 import imagesLoaded from "imagesloaded"
 import Lottie from "lottie-web";
+import Masonry from "masonry-layout"
+import {ScrambleTextPlugin} from "gsap/dist/ScrambleTextPlugin"
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, ScrollToPlugin,ScrambleTextPlugin);
 
 const tl = gsap.timeline();
 const mm = gsap.matchMedia();
@@ -329,48 +331,87 @@ const abilityAni = () => {
 }
 
 const workAni = () => {
-    const imagesArr = gsap.utils.toArray('.img-container .img')
-    const listArr = gsap.utils.toArray('.work-text-box li')
-    let count = 11;
+    const grid = document.querySelector('.grid');
+    const gridArr = gsap.utils.toArray('.grid-item')
+    new Masonry( grid, {
+        itemSelector: '.grid-item',
+        columnWidth: 200,
+        fitWidth: true,
+    });
+    gridArr.forEach((item,index)=>{
+        // console.log(item[0].data('title'))
 
-    gsap.defaults({
-        overwrite: 'auto'
-    })
-
-    gsap.set(imagesArr, {
-        zIndex: gsap.utils.distribute({
-            base: 0,
-            amount: count,
-            from: 'end',
-        }),
-    })
-
-
-    listArr.forEach((list, index) => {
-        list.addEventListener('mouseover', () => {
-            const exceptMe = `.img-container .img:not(:nth-child(${index + 1}))`
-            const me = `.img-container .img:nth-child(${index + 1})`
-            const imageAnimation = gsap.timeline()
-                .to(exceptMe, {
-                    height: 0, filter: 'brightness(0.4)', onComplete: () => {
-                        gsap.set(me, {zIndex: ++count})
-                    }
-                })
-                .set(me, {height: '100%'}, 0)
-                .to(me, {filter: 'brightness(1)'}, 0.5)
-
-
-            const navAnimation = gsap.timeline({
-                defaults: {
-                    duration: 0.2
-                }
+        const animation = gsap.timeline({paused: true})
+        animation
+            .to(item.querySelector('img'),{
+                filter: "blur(2px) brightness(0.8)",
+                duration:0,
             })
-                .to(listArr, {opacity: 0.2})
-                .to(listArr, {opacity: 1}, 0)
+            .to(item.querySelector('p'),{
+            scrambleText: {
+                text: `${item.dataset['title']}`,
+            },
+            duration: 1
+        })
+            .to(item.querySelector('span'),{
+                scrambleText: {
+                    text: `${item.dataset['type']}`,
+                },
+                duration: 0.5
+            },0)
 
-
+        item.addEventListener('mouseenter',()=>{
+            animation.play()
+        })
+        item.addEventListener('mouseleave',()=>{
+            animation.reverse()
         })
     })
+
+
+
+
+
+
+
+// const imagesArr = gsap.utils.toArray('.img-container .img')
+    // const listArr = gsap.utils.toArray('.work-text-box li')
+    // let count = 11;
+    // gsap.defaults({
+    //     overwrite: 'auto'
+    // })
+    // gsap.set(imagesArr, {
+    //     zIndex: gsap.utils.distribute({
+    //         base: 0,
+    //         amount: count,
+    //         from: 'end',
+    //     }),
+    // })
+    // listArr.forEach((list, index) => {
+    //     list.addEventListener('mouseover', () => {
+    //         const exceptMe = `.img-container .img:not(:nth-child(${index + 1}))`
+    //         const me = `.img-container .img:nth-child(${index + 1})`
+    //         const imageAnimation = gsap.timeline()
+    //             .to(exceptMe, {
+    //                 height: 0, filter: 'brightness(0.4)', onComplete: () => {
+    //                     gsap.set(me, {zIndex: ++count})
+    //                 }
+    //             })
+    //             .set(me, {height: '100%'}, 0)
+    //             .to(me, {filter: 'brightness(1)'}, 0.5)
+    //
+    //
+    //         const navAnimation = gsap.timeline({
+    //             defaults: {
+    //                 duration: 0.2
+    //             }
+    //         })
+    //             .to(listArr, {opacity: 0.2})
+    //             .to(listArr, {opacity: 1}, 0)
+    //
+    //
+    //     })
+    // })
 
 
 }

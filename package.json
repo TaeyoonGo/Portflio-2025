@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "gulp dev",
     "build": "gulp build",
-    "deploy" : "gulp deploy"
+    "deploy": "gulp deploy"
   },
   "author": "",
   "license": "ISC",
@@ -37,6 +37,7 @@
     "gsap": "^3.13.0",
     "imagesloaded": "^5.0.0",
     "lottie-web": "^5.13.0",
+    "masonry-layout": "^4.2.2",
     "smooth-scrollbar": "^8.8.4"
   }
 }
