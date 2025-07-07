@@ -273,7 +273,7 @@ const characterAni = () => {
                 return (childTop - parentTop);
             }
         }),
-        markers:true,
+
         scrub:true,
     })
 }
@@ -297,6 +297,8 @@ const abilityAni = () => {
         },
     )
 
+    let clamp = gsap.utils.clamp(-25, 25);
+
     ScrollTrigger.create({
         trigger: '.section3',
         start: 'top top',
@@ -307,16 +309,16 @@ const abilityAni = () => {
         scrub: true,
         onUpdate: ({progress, getVelocity}) => {
             let widthToProgress = progress.toFixed(2) * 100
-            let scrollToVelocity = getVelocity()
-
+            let Velocity = getVelocity()
+            let skew = clamp(Velocity);
             gsap.to('.section3', {
-                background: widthToProgress >= 40 ? '#000' : '#fff',
-                color: widthToProgress >= 40 ? '#fff' : '#000'
+                background: widthToProgress >= 50 ? '#000' : '#fff',
+                color: widthToProgress >= 50 ? '#fff' : '#000'
             })
 
             gsap.fromTo(words,
                 {
-                    skewX: `${scrollToVelocity / 100}deg`,
+                    skewX: `${skew}deg`,
                     duration: 1,
                 }, {
                     skewX: 0,
