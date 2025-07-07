@@ -183,7 +183,6 @@ const mousePoint = () => {
 
 
     mm.add(mmOption,(ctx)=>{
-
         const {isMobile,isDesktop} = ctx.conditions;
         gsap.to('#cursor',{
 
@@ -211,17 +210,16 @@ function init() {
 
 
 const homeAni = () => {
-
+    gsap.set('.text-layout-center',{autoAlpha:0})
+    gsap.set('.text-layout-center .stagger', {filter: "blur(10px)",transform:'scale(0.8)'})
     const timeline = gsap.timeline()
-        .to('.section1 .word-inner', {filter: "blur(10px)", scale: 0.4})
+        .to('.section1 .word-inner', {filter: "blur(10px)", scale: 1})
         .to('.img-star', {
             rotation: 360,
             scale: 100,
         }, 0)
-        .to('.text-layout-center', {autoAlpha: 1}, 0)
-        .from('.text-layout-center .title', {y: 50, duration: 0.8, opacity: 0})
-        .from('.text-layout-center .desc', {y: 50, duration: 0.8, opacity: 0})
-        .from('.text-layout-center a', {duration: 0.8, opacity: 0})
+        .to('.text-layout-center',{autoAlpha:1})
+        .to('.text-layout-center .stagger', {filter: "blur(0px)",duration: 0.8,transform:'scale(1)'})
 
 
     ScrollTrigger.create({
@@ -272,7 +270,7 @@ const abilityAni = () => {
     const wordLayout = document.querySelector('.section3 .word-inner')
     const {words} = new SplitText(wordLayout, {type: 'words'})
 
-
+    console.log(wordLayout.scrollWidth - innerWidth)
     const animation = gsap.fromTo(words,
         {
             x: 0,
@@ -287,8 +285,10 @@ const abilityAni = () => {
     ScrollTrigger.create({
         trigger: '.section3',
         start: 'top top',
-        end: '+=3000',
+        end: "+=3000px",
+        // pinnedContainer:'.section3',
         pin: true,
+        markers:true,
         animation,
         scrub: true,
         onUpdate: ({progress, getVelocity}) => {

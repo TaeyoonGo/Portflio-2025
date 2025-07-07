@@ -8,7 +8,7 @@
 #cursor {
     width: config.rem(60);
     height: config.rem(60);
-    background-color: var.$color-white;;
+    background-color: var.$color-white;
     z-index: 9999;
     border-radius: 50%;
     pointer-events: none;
@@ -199,6 +199,7 @@
             }
 
             .title {
+
                 font-size: config.rem(64);
                 font-weight: var.$font-weight-semi-bold;
                 margin-bottom: config.rem(20);
@@ -318,7 +319,9 @@
 
     &.section4 {
         background-color: var.$color-white-300;
-
+        @include config.tablet-res{
+            height: auto;
+        }
         .work-container {
             gap: config.rem(30);
             padding: config.rem(40);
@@ -333,7 +336,7 @@
             flex: 1 1 100%;
             position: relative;
             @include config.tablet-res {
-                flex: 1 1 config.rem(500);
+                display: none;
             }
 
             .img {
@@ -429,7 +432,7 @@
     width: 100%;
     left: 0;
     @include config.tablet-res {
-        height: auto;
+        display: none;
     }
 
     .contact-list {
