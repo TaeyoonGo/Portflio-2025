@@ -363,8 +363,9 @@ const contactAni = () => {
     ScrollTrigger.create({
         ease: 'none',
         trigger: '.section5',
-        start: 'top center',
-        end: 'max',
+        markers:true,
+        start: 'bottom bottom',
+        end: 'bottom bottom',
         animation: animation,
         toggleActions: "play play reverse reverse"
 
