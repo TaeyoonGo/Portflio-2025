@@ -310,7 +310,7 @@ const abilityAni = () => {
         onUpdate: ({progress, getVelocity}) => {
             let widthToProgress = progress.toFixed(2) * 100
             let Velocity = getVelocity()
-            let skew = clamp(Velocity);
+            let skew = clamp(Velocity/-50);
             gsap.to('.section3', {
                 background: widthToProgress >= 50 ? '#000' : '#fff',
                 color: widthToProgress >= 50 ? '#fff' : '#000'
