@@ -141,7 +141,7 @@ const Loading = () => {
         const grid = document.querySelector('.grid');
         new Masonry( grid, {
             itemSelector: '.grid-item',
-            columnWidth: 600,
+            columnWidth: 500,
             fitWidth: true,
             gutter: 30
         });
@@ -272,7 +272,7 @@ const characterAni = () => {
     ScrollTrigger.create({
         trigger:'.section2',
         start:`top ${document.querySelector('.sticky-header').offsetHeight}`,
-        end:'bottom bottom',
+        end:'bottom 80%',
         animation:gsap.to('.character-title',{
             ease:'none',
             y: () => {
