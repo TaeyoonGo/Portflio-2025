@@ -34,6 +34,13 @@
     }
 }
 
+.mo-show{
+    display: none;
+    @include config.sm-res{
+        display: block;
+    }
+}
+
 .splash-loader-box {
     width: 100vw;
     height: 100vh;
@@ -103,7 +110,7 @@
         display: flex;
         gap: config.rem(24);
         @include config.md-res{
-            flex-direction: column;
+            display: none;
         }
         .item {
             position: relative;
@@ -162,12 +169,15 @@
         }
 
         .word-inner {
-            color: var.$color-black;;
+            color: var.$color-black;
             font-weight: var.$font-weight-black-bold;
             font-size: config.rem(128);
             @include config.xl-res {
                 text-align: center;
                 font-size: config.rem(90);
+            }
+            @include config.sm-res{
+                font-size: config.rem(50);
             }
         }
 
@@ -212,6 +222,13 @@
                 @include config.xl-res {
                     font-size: config.rem(40);
                 }
+                @include config.md-res {
+                    font-size: config.rem(32);
+                }
+                @include config.sm-res{
+                    font-size: config.rem(20);
+                }
+
             }
 
             .desc {
@@ -220,6 +237,9 @@
                 margin-bottom: config.rem(20);
                 @include config.xl-res {
                     font-size: config.rem(20);
+                }
+                @include config.xl-res {
+                    font-size: config.rem(16);
                 }
             }
 
@@ -232,6 +252,9 @@
                 border-radius: config.rem(30);
                 margin-top: config.rem(12);
                 display: inline-block;
+                @include config.md-res {
+                    font-size: config.rem(20);
+                }
             }
         }
     }
@@ -285,6 +308,9 @@
                     font-size: config.rem(32);
                     font-weight: var.$font-weight-semi-bold;
                     margin-bottom: 1vw;
+                    @include config.md-res {
+                        font-size: config.rem(28);
+                    }
                 }
 
                 p {
@@ -293,6 +319,9 @@
                     margin-bottom: 20dvh;
                     @include config.xl-res {
                         margin-bottom: 10dvh;
+                    }
+                    @include config.md-res {
+                        font-size: config.rem(16);
                     }
                 }
 
@@ -335,6 +364,9 @@
                 width: config.rem(500);
                 height: auto;
                 margin-bottom: config.rem(30);
+                @include config.sm-res{
+                    width: config.rem(375);
+                }
                 //margin: config.rem(12);
                 a{
                     z-index: 10;
