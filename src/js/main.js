@@ -99,6 +99,7 @@ const navigation = () => {
     let sectionArr = gsap.utils.toArray('.section')
 
 
+
     const scroll = sectionArr.map((section, _) => {
         let scrollToEvent = ScrollTrigger.create({
             trigger: section,
@@ -107,6 +108,8 @@ const navigation = () => {
         })
         return scrollToEvent
     })
+
+
 
     navArr.forEach((nav, index) => {
         const tl = gsap.timeline({paused: true})
@@ -272,7 +275,7 @@ const characterAni = () => {
     ScrollTrigger.create({
         trigger:'.section2',
         start:`top ${document.querySelector('.sticky-header').offsetHeight}`,
-        end:'bottom 80%',
+        end:'bottom 90%',
         animation:gsap.to('.character-title',{
             ease:'none',
             y: () => {
@@ -429,7 +432,7 @@ const contactAni = () => {
     ScrollTrigger.create({
         ease: 'none',
         trigger: '.section5',
-        start: 'bottom bottom',
+        start: '80% bottom',
         end: 'bottom bottom',
         animation: animation,
         toggleActions: "play play reverse reverse"
