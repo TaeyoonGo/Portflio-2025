@@ -413,19 +413,21 @@
     width: 100%;
     left: 0;
     @include config.tablet-res {
-        display: none;
+        height: auto;
     }
 
     .contact-list {
         padding: 0 config.rem(40);
         height: 100%;
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
         @include config.tablet-res {
-            flex-direction: column;
+            //flex-direction: column;
             gap: config.rem(16);
             padding: config.rem(20);
+
         }
 
         .item {

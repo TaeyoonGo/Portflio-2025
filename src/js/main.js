@@ -12,18 +12,20 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, ScrollToPlugin,Scr
 
 const tl = gsap.timeline();
 const mm = gsap.matchMedia();
-
-const mmOption = {
-    isMobile: '(max-width:991px)',
-    isDesktop: '(min-width:501px)'
-}
-
-
 let smoother = ScrollSmoother.create({
     smooth: 2,
     effects: true,
     normalizeScroll: true
 });
+const mmOption = {
+    isMobile: '(min-width:661px)',
+    isTablet: '(min-width:991px)',
+    isDesktop: '(min-width:1199px)',
+
+}
+
+
+
 
 
 const IntroProgress = () => {
@@ -80,7 +82,6 @@ const ImgStarAni = () => {
 
     return animation
 }
-
 const IntroMasterTimeline = () => {
     const MasterAnimation = gsap.timeline()
     MasterAnimation
@@ -92,7 +93,6 @@ const IntroMasterTimeline = () => {
             smoother.paused(false)
         })
 }
-
 const navigation = () => {
     let navArr = gsap.utils.toArray('.navi-list > li')
     let header = document.querySelector('.sticky-header')
@@ -126,7 +126,6 @@ const navigation = () => {
     })
 
 }
-
 const Loading = () => {
     gsap.to(window, {duration: 0, scrollTo: {y: 0, x: 0}, ease: "none"});
     smoother.paused(true);
@@ -187,19 +186,11 @@ const mousePoint = () => {
         })
     })
 
-
-    mm.add(mmOption, (ctx) => {
-        const {isMobile, isDesktop} = ctx.conditions;
-        gsap.to('#cursor', {})
-    })
-
-
 }
 
 const circleAni = () => {
 
 }
-
 
 function init() {
     Loading();
@@ -211,8 +202,6 @@ function init() {
     navigation();
     characterAni();
 }
-
-
 const homeAni = () => {
     gsap.set('.text-layout-center', {autoAlpha: 0})
     gsap.set('.text-layout-center .stagger', {filter: "blur(10px)", transform: 'scale(0.8)'})
@@ -242,7 +231,6 @@ const homeAni = () => {
 
     })
 }
-
 const characterAni = () => {
     gsap.set(".content-lists .list p", {opacity: 1});
     let containers = gsap.utils.toArray(".content-lists .list");
@@ -270,28 +258,33 @@ const characterAni = () => {
 
 
     });
+    mm.add(mmOption.isDesktop,(ctx)=>{
+        let titleDown = ScrollTrigger.create({
+            trigger:'.section2',
+            start:`top ${document.querySelector('.sticky-header').offsetHeight}`,
+            end:'bottom 90%',
+            animation:gsap.to('.character-title',{
+                ease:'none',
+                y: () => {
 
-
-    ScrollTrigger.create({
-        trigger:'.section2',
-        start:`top ${document.querySelector('.sticky-header').offsetHeight}`,
-        end:'bottom 90%',
-        animation:gsap.to('.character-title',{
-            ease:'none',
-            y: () => {
-                const child = document.querySelector('.list.last');
-                const parents = document.querySelector('.content-lists')
-                const childTop = child.getBoundingClientRect().top;
-                const parentTop = parents.getBoundingClientRect().top;
-                return (childTop - parentTop);
-            }
-        }),
-
-        scrub:true,
+                    const child = document.querySelector('.list.last');
+                    const parents = document.querySelector('.content-lists')
+                    const childTop = child.getBoundingClientRect().top;
+                    const parentTop = parents.getBoundingClientRect().top;
+                    return (childTop - parentTop);
+                }
+            }),
+            scrub:true,
+        })
+        return()=>{
+            titleDown.kill();
+        }
     })
+
+
+
+
 }
-
-
 const abilityAni = () => {
     // 1. 부모 요소를 pin 고정 후 레이아웃 움직이지 못하게
     // 2. 자식 요소에 애니메이션 추가
@@ -316,6 +309,7 @@ const abilityAni = () => {
         trigger: '.section3',
         start: 'top top',
         end: "+=3000px",
+
         // pinnedContainer:'.section3',
         pin: true,
         animation,
@@ -340,14 +334,11 @@ const abilityAni = () => {
         },
     })
 }
-
 const workAni = () => {
     const gridArr = gsap.utils.toArray('.grid-item')
 
 
     gridArr.forEach((item,index)=>{
-        // console.log(item[0].data('title'))
-
         const animation = gsap.timeline({paused: true})
         animation
             .to(item.querySelector('img'),{
@@ -431,6 +422,7 @@ const contactAni = () => {
 
     ScrollTrigger.create({
         ease: 'none',
+        markers:true,
         trigger: '.section5',
         start: '80% bottom',
         end: 'bottom bottom',
@@ -439,8 +431,6 @@ const contactAni = () => {
 
     })
 }
-
-
 // document.addEventListener('DOMContentLoaded',resetScroll)
 document.addEventListener('DOMContentLoaded', init)
 

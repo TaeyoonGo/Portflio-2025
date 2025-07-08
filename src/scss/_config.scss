@@ -10,7 +10,7 @@
 
 
 @mixin mo-res {
-    @media (min-width: 0px) and (max-width: #{var.$table-size}) {
+    @media (min-width: 0px) and (max-width: #{var.$tablet-size}) {
         @content;
     }
 }
