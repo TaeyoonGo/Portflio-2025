@@ -29,7 +29,7 @@
         color: var.$color-black;;
     }
 
-    @include config.tablet-res {
+    @include config.xl-res {
         display: none;
     }
 }
@@ -158,7 +158,7 @@
             color: var.$color-black;;
             font-weight: var.$font-weight-black-bold;
             font-size: config.rem(128);
-            @include config.tablet-res {
+            @include config.xl-res {
                 text-align: center;
                 font-size: config.rem(90);
             }
@@ -202,7 +202,7 @@
                 font-size: config.rem(64);
                 font-weight: var.$font-weight-semi-bold;
                 margin-bottom: config.rem(20);
-                @include config.tablet-res {
+                @include config.xl-res {
                     font-size: config.rem(40);
                 }
             }
@@ -211,7 +211,7 @@
                 line-height: 1.3;
                 font-size: config.rem(24);
                 margin-bottom: config.rem(20);
-                @include config.tablet-res {
+                @include config.xl-res {
                     font-size: config.rem(20);
                 }
             }
@@ -244,7 +244,7 @@
             display: flex;
             justify-content: space-between;
             gap: config.rem(64);
-            @include config.tablet-res {
+            @include config.xl-res {
                 flex-direction: column;
             }
 
@@ -284,7 +284,7 @@
                     font-size: config.rem(20);
                     line-height: 1.3;
                     margin-bottom: 20dvh;
-                    @include config.tablet-res {
+                    @include config.xl-res {
                         margin-bottom: 10dvh;
                     }
                 }
@@ -385,7 +385,7 @@
                 color: var.$color-black;;
                 font-size: config.rem(24);
                 border: 1px solid var.$color-black;;
-                @include config.tablet-res {
+                @include config.xl-res {
                     margin-bottom: config.rem(24);
                 }
             }
@@ -395,7 +395,7 @@
                 font-size: config.rem(120);
                 color: var.$color-black;;
                 font-weight: 700;
-                @include config.tablet-res {
+                @include config.xl-res {
                     font-size: config.rem(90);
                 }
             }
@@ -412,7 +412,7 @@
     bottom: 0;
     width: 100%;
     left: 0;
-    @include config.tablet-res {
+    @include config.xl-res {
         height: auto;
     }
 
@@ -423,44 +423,79 @@
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
-        @include config.tablet-res {
-            //flex-direction: column;
+        @include config.xl-res {
             gap: config.rem(16);
-            padding: config.rem(20);
-
+            padding: config.rem(20) config.rem(40);
+        }
+        @include config.md-res{
+            justify-content: start;
+            gap: 0;
         }
 
         .item {
-            color: var.$color-black;;
-
+            color: var.$color-black;
+            @include config.md-res{
+                flex: 1 1 25%;
+                &.copyright,
+                &.work{
+                    display: none;
+                }
+            }
             .title {
                 font-size: config.rem(32);
                 display: block;
                 font-weight: 700;
                 margin-bottom: config.rem(16);
-                @include config.tablet-res {
+                @include config.xl-res {
                     font-size: config.rem(24);
                     text-align: center;
                     margin-bottom: config.rem(10);
                 }
-
+                @include config.md-res{
+                    display: none;
+                }
             }
 
             .copy-right {
                 color: var.$color-black;;
                 font-size: config.rem(14);
                 line-height: 1.2;
-                @include config.tablet-res {
+                @include config.xl-res {
                     text-align: center;
                 }
             }
 
             .contact {
+                display: inline-block;
                 font-size: config.rem(18);
-
                 a {
+                    display: inline-block;
                     text-decoration: none;
-                    color: var.$color-black;;
+                    color: var.$color-black;
+                    &.instagram{
+                        margin-right: config.rem(10);
+                        @include config.sm-res{
+                            margin-right: 0;
+                        }
+                    }
+                }
+
+                .ico-envelope,.ico-phone{
+                    display: none;
+                    @include config.xl-res{
+                        display: block;
+                    }
+                }
+                @include config.xl-res{
+                    .envelope,.phone{
+                        display: none;
+                    }
+                }
+                @include config.md-res{
+
+                    &.alink{display: flex;
+                        justify-content: space-between;
+                    }
                 }
 
             }
@@ -469,10 +504,7 @@
 
     i {
         font-size: config.rem(32);
-
-        &:first-child {
-            margin-right: config.rem(10);
-        }
+        display: inline-block;
     }
 }
 

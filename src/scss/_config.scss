@@ -9,14 +9,26 @@
 }
 
 
-@mixin mo-res {
-    @media (min-width: 0px) and (max-width: #{var.$tablet-size}) {
+@mixin sm-res {
+    @media (min-width: 0px) and (max-width: #{var.$sm-size}) {
         @content;
     }
 }
 
-@mixin tablet-res {
-    @media (min-width: 0px) and (max-width: #{var.$pc-size}) {
+@mixin md-res {
+    @media (min-width: 0px) and (max-width: #{var.$md-size}) {
+        @content;
+    }
+}
+
+@mixin lg-res {
+    @media (min-width: 0px) and (max-width: #{var.$lg-size}) {
+        @content;
+    }
+}
+
+@mixin xl-res {
+    @media (min-width: 0px) and (max-width: #{var.$xl-size}) {
         @content;
     }
 }

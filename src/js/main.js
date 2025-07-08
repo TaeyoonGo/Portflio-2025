@@ -419,7 +419,6 @@ const contactAni = () => {
 
     ScrollTrigger.create({
         ease: 'none',
-        markers:true,
         trigger: '.section5',
         start: '80% bottom',
         end: 'bottom bottom',
