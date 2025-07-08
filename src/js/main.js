@@ -113,7 +113,7 @@ const navigation = () => {
 
     navArr.forEach((nav, index) => {
         const tl = gsap.timeline({paused: true})
-            .to(nav.querySelector('span'), {color: '#e8e8e8', delay: 0}, 0)
+            .to(nav.querySelector('button'), {color: '#e8e8e8', delay: 0}, 0)
             .to(nav.querySelector('div'), {scaleX: 1, duration: 0.3}, 0)
 
 

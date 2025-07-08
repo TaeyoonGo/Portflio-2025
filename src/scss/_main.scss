@@ -85,24 +85,33 @@
     background-color: var.$color-white-200;;
     z-index: 101;
     transform: translateY(config.rem(-90));
-
+    button{
+        background: inherit;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0;
+        overflow: visible;
+    }
     .header-grid {
         display: flex;
+        align-items: center;
         justify-content: space-between;
-        align-content: center;
-        padding: config.rem(32) config.rem(40);
+        padding: config.rem(20) config.rem(40);
     }
-
     .navi-list {
         display: flex;
         gap: config.rem(24);
-
+        @include config.md-res{
+            flex-direction: column;
+        }
         .item {
-            cursor: pointer;
-            font-weight: var.$font-weight-semi-bold;
-            font-size: config.rem(24);
             position: relative;
-
+            button{
+                cursor: pointer;
+                font-weight: var.$font-weight-semi-bold;
+                font-size: config.rem(24);
+            }
             .bar {
                 bottom: config.rem(-6);
                 left: 0;
@@ -112,15 +121,13 @@
                 width: 100%;
                 transform-origin: center center;
             }
+
+
+
         }
     }
 
     .brand-logo {
-        top: 50%;
-        transform: translateY(-50%);
-        left: config.rem(40);
-        position: absolute;
-
         a {
             font-weight: 700;
             color: var.$color-black;;
@@ -415,7 +422,9 @@
     @include config.xl-res {
         height: auto;
     }
-
+    @include config.md-res{
+        //display: none;
+    }
     .contact-list {
         padding: 0 config.rem(40);
         height: 100%;
@@ -492,7 +501,6 @@
                     }
                 }
                 @include config.md-res{
-
                     &.alink{display: flex;
                         justify-content: space-between;
                     }
