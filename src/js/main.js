@@ -165,11 +165,8 @@ const mousePoint = () => {
     const cursor = document.querySelector('#cursor');
     const body = document.querySelector('body')
     const visibleArr = gsap.utils.toArray('.visible-cursor-show');
-
-
     let xTo = gsap.quickTo(cursor, "x", {duration: 0.4, ease: 'power3'})
     let yTo = gsap.quickTo(cursor, "y", {duration: 0.4, ease: 'power3'})
-
     body.addEventListener('mousemove', ({clientX: x, clientY: y}) => {
         xTo(x - (cursor.offsetWidth * 0.5))
         yTo(y - (cursor.offsetHeight * 0.5))
@@ -427,7 +424,7 @@ const contactAni = () => {
         start: '80% bottom',
         end: 'bottom bottom',
         animation: animation,
-        toggleActions: "play play reverse reverse"
+        toggleActions: "play play play reverse"
 
     })
 }
