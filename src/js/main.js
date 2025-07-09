@@ -225,30 +225,37 @@ const characterAni = () => {
     let containers = gsap.utils.toArray(".content-lists .list");
     containers.forEach((container) => {
         let text = container.querySelector(".content-lists .list p");
-        SplitText.create(text, {
-            type: "lines",
-            mask: "lines",
-            autoSplit: true,
-            onSplit: (instance) => {
-                return gsap.from(instance.lines, {
-                    duration: 1,
-                    y: 100,
-                    stagger: 1,
-                    scrollTrigger: {
-                        trigger: container,
-                        scrub: true,
-                        start: "clamp(top center)",
-                        end: "clamp(bottom center)",
-                        once: true,
-                    },
-                });
+        let textAni = mm.add(mmOption.isDesktop,(ctx)=>{
+            let text = SplitText.create(text, {
+                type: "lines",
+                mask: "lines",
+                autoSplit: true,
+                onSplit: (instance) => {
+                    return gsap.from(instance.lines, {
+                        duration: 1,
+                        y: 100,
+                        stagger: 1,
+                        scrollTrigger: {
+                            trigger: container,
+                            scrub: true,
+                            start: "clamp(top center)",
+                            end: "clamp(bottom center)",
+                            once: true,
+                        },
+                    });
+                }
+            });
+
+            return() => {
+                textAni.kill();
             }
-        });
+        })
+
 
 
     });
     mm.add(mmOption.isDesktop,(ctx)=>{
-        let titleDown = ScrollTrigger.create({
+        let titleAni = ScrollTrigger.create({
             trigger:'.section2',
             start:`top ${document.querySelector('.sticky-header').offsetHeight}`,
             end:'bottom 90%',
@@ -266,7 +273,7 @@ const characterAni = () => {
             scrub:true,
         })
         return()=>{
-            titleDown.kill();
+            titleAni.kill();
         }
     })
 

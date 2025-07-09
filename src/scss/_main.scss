@@ -34,9 +34,9 @@
     }
 }
 
-.mo-show{
+.mo-show {
     display: none;
-    @include config.sm-res{
+    @include config.sm-res {
         display: block;
     }
 }
@@ -92,7 +92,8 @@
     background-color: var.$color-white-200;;
     z-index: 101;
     transform: translateY(config.rem(-90));
-    button{
+
+    button {
         background: inherit;
         border: none;
         box-shadow: none;
@@ -100,25 +101,30 @@
         padding: 0;
         overflow: visible;
     }
+
     .header-grid {
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: config.rem(20) config.rem(40);
     }
+
     .navi-list {
         display: flex;
         gap: config.rem(24);
-        @include config.md-res{
+        @include config.md-res {
             display: none;
         }
+
         .item {
             position: relative;
-            button{
+
+            button {
                 cursor: pointer;
                 font-weight: var.$font-weight-semi-bold;
                 font-size: config.rem(24);
             }
+
             .bar {
                 bottom: config.rem(-6);
                 left: 0;
@@ -128,7 +134,6 @@
                 width: 100%;
                 transform-origin: center center;
             }
-
 
 
         }
@@ -141,13 +146,19 @@
             font-size: config.rem(32);
             text-align: center;
             text-decoration: none;
+            @include config.md-res {
+                font-size: config.rem(24);
+            }
         }
 
         em {
             font-weight: 500;
-            color: inherit;
-            font-size: config.rem(18);
+                color: inherit;
+            font-size: config.rem(16);
             display: block;
+            @include config.md-res {
+                font-size: config.rem(16);
+            }
         }
     }
 }
@@ -176,7 +187,7 @@
                 text-align: center;
                 font-size: config.rem(90);
             }
-            @include config.sm-res{
+            @include config.sm-res {
                 font-size: config.rem(50);
             }
         }
@@ -225,7 +236,7 @@
                 @include config.md-res {
                     font-size: config.rem(32);
                 }
-                @include config.sm-res{
+                @include config.sm-res {
                     font-size: config.rem(20);
                 }
 
@@ -345,25 +356,30 @@
             gap: 3vw;
             display: flex;
             padding: config.rem(40);
+
             * {
                 font-weight: var.$font-weight-black-bold;
                 font-size: 6vw
             }
         }
     }
-    &.section4{
+
+    &.section4 {
         overflow: visible;
         height: 100%;
         background-color: var.$color-white-300;
-        .grid{
+
+        .grid {
             margin: 0 auto;
             column-width: config.rem(350);
             column-gap: config.rem(30);
-            .grid-item{
+
+            .grid-item {
                 display: inline-block;
                 position: relative;
                 margin-bottom: config.rem(30);
-                a{
+
+                a {
                     z-index: 10;
                     width: 100%;
                     height: 100%;
@@ -371,11 +387,13 @@
                     position: absolute;
                     text-decoration: none;
                 }
-                img{
+
+                img {
                     width: 100%;
                     height: 100%;
                 }
-                p{
+
+                p {
                     font-weight: var.$font-weight-semi-bold;
                     position: absolute;
                     left: config.rem(40);
@@ -384,7 +402,8 @@
                     z-index: 1;
                     font-size: config.rem(24);
                 }
-                span{
+
+                span {
                     z-index: 1;
                     position: absolute;
                     left: config.rem(40);
@@ -395,12 +414,14 @@
                 }
             }
         }
-        .work-layout{
+
+        .work-layout {
             padding: config.rem(40);
 
 
         }
     }
+
     &.section5 {
         background-color: var.$color-white;
 
@@ -420,7 +441,12 @@
                 font-size: config.rem(24);
                 border: 1px solid var.$color-black;;
                 @include config.xl-res {
+                    padding: config.rem(13) config.rem(26);
                     margin-bottom: config.rem(24);
+                }
+                @include config.sm-res {
+                    padding: config.rem(11) config.rem(22);
+                    font-size: config.rem(18);
                 }
             }
 
@@ -431,6 +457,12 @@
                 font-weight: 700;
                 @include config.xl-res {
                     font-size: config.rem(90);
+                }
+                @include config.xl-res {
+                    font-size: config.rem(60);
+                }
+                @include config.sm-res {
+                    font-size: config.rem(40);
                 }
             }
         }
@@ -449,9 +481,10 @@
     @include config.xl-res {
         height: auto;
     }
-    @include config.md-res{
+    @include config.md-res {
         //display: none;
     }
+
     .contact-list {
         padding: 0 config.rem(40);
         height: 100%;
@@ -463,20 +496,21 @@
             gap: config.rem(16);
             padding: config.rem(20) config.rem(40);
         }
-        @include config.md-res{
+        @include config.md-res {
             justify-content: start;
             gap: 0;
         }
 
         .item {
             color: var.$color-black;
-            @include config.md-res{
+            @include config.md-res {
                 flex: 1 1 25%;
                 &.copyright,
-                &.work{
+                &.work {
                     display: none;
                 }
             }
+
             .title {
                 font-size: config.rem(32);
                 display: block;
@@ -487,7 +521,7 @@
                     text-align: center;
                     margin-bottom: config.rem(10);
                 }
-                @include config.md-res{
+                @include config.md-res {
                     display: none;
                 }
             }
@@ -504,31 +538,35 @@
             .contact {
                 display: inline-block;
                 font-size: config.rem(18);
+
                 a {
                     display: inline-block;
                     text-decoration: none;
                     color: var.$color-black;
-                    &.instagram{
+
+                    &.instagram {
                         margin-right: config.rem(10);
-                        @include config.sm-res{
+                        @include config.sm-res {
                             margin-right: 0;
                         }
                     }
                 }
 
-                .ico-envelope,.ico-phone{
+                .ico-envelope, .ico-phone {
                     display: none;
-                    @include config.xl-res{
+                    @include config.xl-res {
                         display: block;
                     }
                 }
-                @include config.xl-res{
-                    .envelope,.phone{
+
+                @include config.xl-res {
+                    .envelope, .phone {
                         display: none;
                     }
                 }
-                @include config.md-res{
-                    &.alink{display: flex;
+                @include config.md-res {
+                    &.alink {
+                        display: flex;
                         justify-content: space-between;
                     }
                 }
