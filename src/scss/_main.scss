@@ -355,19 +355,14 @@
         overflow: visible;
         height: 100%;
         background-color: var.$color-white-300;
-        .grid-container{
-
-        }
         .grid{
             margin: 0 auto;
+            column-width: config.rem(350);
+            column-gap: config.rem(30);
             .grid-item{
-                width: config.rem(500);
-                height: auto;
+                display: inline-block;
+                position: relative;
                 margin-bottom: config.rem(30);
-                @include config.sm-res{
-                    width: config.rem(375);
-                }
-                //margin: config.rem(12);
                 a{
                     z-index: 10;
                     width: 100%;
@@ -547,5 +542,6 @@
         display: inline-block;
     }
 }
+
 
 

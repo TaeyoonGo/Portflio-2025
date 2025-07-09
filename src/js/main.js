@@ -5,7 +5,6 @@ import {SplitText} from "gsap/dist/SplitText";
 import {ScrollToPlugin} from "gsap/dist/ScrollToPlugin"
 import imagesLoaded from "imagesloaded"
 import Lottie from "lottie-web";
-import Masonry from "masonry-layout"
 import {ScrambleTextPlugin} from "gsap/dist/ScrambleTextPlugin"
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, ScrollToPlugin,ScrambleTextPlugin);
@@ -18,6 +17,7 @@ let smoother = ScrollSmoother.create({
     normalizeScroll: true
 });
 const mmOption = {
+
     isMobile: '(min-width:661px)',
     isTablet: '(min-width:991px)',
     isDesktop: '(min-width:1199px)',
@@ -140,14 +140,6 @@ const Loading = () => {
     const imgAll = gsap.utils.toArray('img')
 
     const updateProgress = (instance) => {
-        const grid = document.querySelector('.grid');
-        new Masonry( grid, {
-            itemSelector: '.grid-item',
-            columnWidth: 500,
-            fitWidth: true,
-            gutter: 30
-        });
-
         let numberPercent = instance.progressedCount / imgAll.length
         const loaderText = document.querySelector('.loader-text')
         loaderText.textContent = `${Math.round(numberPercent * 100)}%`
@@ -203,7 +195,7 @@ const homeAni = () => {
     gsap.set('.text-layout-center', {autoAlpha: 0})
     gsap.set('.text-layout-center .stagger', {filter: "blur(10px)", transform: 'scale(0.8)'})
     const timeline = gsap.timeline()
-        .to('.section1 .word-inner', {filter: "blur(10px)", scale: 1})
+        .to('.section1 .word-inner', {filter: "blur(10px)", scale: 0.8})
         .to('.img-star', {
             rotation: 360,
             scale: 100,
