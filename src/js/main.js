@@ -7,25 +7,22 @@ import imagesLoaded from "imagesloaded"
 import Lottie from "lottie-web";
 import {ScrambleTextPlugin} from "gsap/dist/ScrambleTextPlugin"
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, ScrollToPlugin,ScrambleTextPlugin);
-
-const tl = gsap.timeline();
-const mm = gsap.matchMedia();
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, ScrollToPlugin, ScrambleTextPlugin);
 let smoother = ScrollSmoother.create({
     smooth: 2,
     effects: true,
     normalizeScroll: true
 });
+
+const tl = gsap.timeline();
+const mm = gsap.matchMedia();
+
+
+
 const mmOption = {
-
     isMobile: '(min-width:661px)',
-    isTablet: '(min-width:991px)',
     isDesktop: '(min-width:1199px)',
-
 }
-
-
-
 
 
 const IntroProgress = () => {
@@ -99,7 +96,6 @@ const navigation = () => {
     let sectionArr = gsap.utils.toArray('.section')
 
 
-
     const scroll = sectionArr.map((section, _) => {
         let scrollToEvent = ScrollTrigger.create({
             trigger: section,
@@ -108,7 +104,6 @@ const navigation = () => {
         })
         return scrollToEvent
     })
-
 
 
     navArr.forEach((nav, index) => {
@@ -191,18 +186,28 @@ function init() {
     navigation();
     characterAni();
 }
+
 const homeAni = () => {
     gsap.set('.text-layout-center', {autoAlpha: 0})
-    gsap.set('.img-star',{translateX:'-50%',transformOrigin:'center center'})
-    gsap.set('.text-layout-center .stagger', {filter: "blur(10px)", transform: 'scale(0.8)'})
+    gsap.set('.img-star', {translateX: '-50%', transformOrigin: 'center center'})
+    mm.add(mmOption,(ctx)=>{
+        const {isMobile} = ctx.conditions
+        gsap.set('.text-layout-center .stagger', {filter: isMobile ? "blur(10px)" : "blur(0px)", transform: isMobile ?'scale(0.8)' : "scale(1)"})
+
+    })
+
+
+
+
+
     const timeline = gsap.timeline()
         .to('.section1 .word-inner', {filter: "blur(10px)", scale: 0.8})
-        .to('.img-star',{width:innerWidth * 10,height:innerWidth * 10,rotation:90, bottom:-(innerWidth * 5)},0)
-        .to('.text-layout-center', {autoAlpha: 1},'-=0.1')
+        .to('.img-star', {width: innerWidth * 10, height: innerWidth * 10, rotation: 90, bottom: -(innerWidth * 5)}, 0)
+        .to('.text-layout-center', {autoAlpha: 1}, '-=0.1')
         .to('.text-layout-center .stagger', {
             filter: "blur(0px)", duration: 0.8, transform: 'scale(1)', stagger: {
                 each: 0.5,
-                ease:'power3.inOut'
+                ease: 'power3.inOut'
             }
         })
 
@@ -224,8 +229,8 @@ const characterAni = () => {
     let containers = gsap.utils.toArray(".content-lists .list");
     containers.forEach((container) => {
         let text = container.querySelector(".content-lists .list p");
-        let textAni = mm.add(mmOption.isDesktop,(ctx)=>{
-            let text = SplitText.create(text, {
+        let textAni = mm.add(mmOption.isDesktop, (ctx) => {
+            SplitText.create(text, {
                 type: "lines",
                 mask: "lines",
                 autoSplit: true,
@@ -244,22 +249,20 @@ const characterAni = () => {
                     });
                 }
             });
-
-            return() => {
+            return () => {
                 textAni.kill();
             }
         })
 
 
-
     });
-    mm.add(mmOption.isDesktop,(ctx)=>{
+    mm.add(mmOption.isDesktop, (ctx) => {
         let titleAni = ScrollTrigger.create({
-            trigger:'.section2',
-            start:`top ${document.querySelector('.sticky-header').offsetHeight}`,
-            end:'bottom 90%',
-            animation:gsap.to('.character-title',{
-                ease:'none',
+            trigger: '.section2',
+            start: `top ${document.querySelector('.sticky-header').offsetHeight}`,
+            end: 'bottom 90%',
+            animation: gsap.to('.character-title', {
+                ease: 'none',
                 y: () => {
 
                     const child = document.querySelector('.list.last');
@@ -269,16 +272,12 @@ const characterAni = () => {
                     return (childTop - parentTop);
                 }
             }),
-            scrub:0.5,
+            scrub: 0.5,
         })
-        return()=>{
+        return () => {
             titleAni.kill();
         }
     })
-
-
-
-
 }
 const abilityAni = () => {
     // 1. 부모 요소를 pin 고정 후 레이아웃 움직이지 못하게
@@ -298,7 +297,7 @@ const abilityAni = () => {
     )
     let clamp = gsap.utils.clamp(-25, 25);
 
-    mm.add(mmOption.isMobile,()=>{
+    mm.add(mmOption.isMobile, () => {
         let ScrollAni = ScrollTrigger.create({
             trigger: '.section3',
             start: 'top top',
@@ -310,7 +309,7 @@ const abilityAni = () => {
             onUpdate: ({progress, getVelocity}) => {
                 let widthToProgress = progress.toFixed(2) * 100
                 let Velocity = getVelocity()
-                let skew = clamp(Velocity/-50);
+                let skew = clamp(Velocity / -50);
                 gsap.to('.section3', {
                     background: widthToProgress >= 50 ? '#000' : '#fff',
                     color: widthToProgress >= 50 ? '#fff' : '#000'
@@ -327,7 +326,7 @@ const abilityAni = () => {
             },
         })
 
-        return()=>{
+        return () => {
             ScrollAni.kill()
         }
     })
@@ -336,38 +335,33 @@ const workAni = () => {
     const gridArr = gsap.utils.toArray('.grid-item')
 
 
-    gridArr.forEach((item,index)=>{
+    gridArr.forEach((item, index) => {
         const animation = gsap.timeline({paused: true})
         animation
-            .to(item.querySelector('img'),{
+            .to(item.querySelector('img'), {
                 filter: "blur(2px) brightness(0.8)",
-                duration:0,
+                duration: 0,
             })
-            .to(item.querySelector('p'),{
-            scrambleText: {
-                text: `${item.dataset['title']}`,
-            },
-            duration: 1
-        })
-            .to(item.querySelector('span'),{
+            .to(item.querySelector('p'), {
+                scrambleText: {
+                    text: `${item.dataset['title']}`,
+                },
+                duration: 1
+            })
+            .to(item.querySelector('span'), {
                 scrambleText: {
                     text: `${item.dataset['type']}`,
                 },
                 duration: 0.5
-            },0)
+            }, 0)
 
-        item.addEventListener('mouseenter',()=>{
+        item.addEventListener('mouseenter', () => {
             animation.play()
         })
-        item.addEventListener('mouseleave',()=>{
+        item.addEventListener('mouseleave', () => {
             animation.reverse()
         })
     })
-
-
-
-
-
 
 
 // const imagesArr = gsap.utils.toArray('.img-container .img')
