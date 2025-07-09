@@ -195,12 +195,12 @@
         .img-star {
             position: absolute;
             z-index: 1;
-            bottom: config.rem(30);
+            bottom: config.rem(80);
             left: 50%;
-            transform: translate(-50%);
-            width: config.rem(90);
-            height: config.rem(80);
+            width: config.rem(55);
+            height: config.rem(55);
 
+            will-change: height, width, top;
             img {
                 width: 100%;
                 height: 100%;
@@ -341,10 +341,18 @@
     }
 
     &.section3 {
+        @include config.sm-res{
+            overflow: visible;
+            height: auto;
+        }
         .word-container {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
+            @include config.sm-res{
+                position: relative;
+                transform: translateY(0);
+            }
         }
 
         .word-outer {
@@ -356,10 +364,18 @@
             gap: 3vw;
             display: flex;
             padding: config.rem(40);
+            @include config.sm-res{
+                flex-direction: column;
+                gap: config.rem(24);
+            }
 
             * {
                 font-weight: var.$font-weight-black-bold;
-                font-size: 6vw
+                font-size: 6vw;
+                @include config.sm-res{
+                    text-align: center;
+                    font-size: config.rem(38);
+                }
             }
         }
     }

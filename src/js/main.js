@@ -193,14 +193,12 @@ function init() {
 }
 const homeAni = () => {
     gsap.set('.text-layout-center', {autoAlpha: 0})
+    gsap.set('.img-star',{translateX:'-50%',transformOrigin:'center center'})
     gsap.set('.text-layout-center .stagger', {filter: "blur(10px)", transform: 'scale(0.8)'})
     const timeline = gsap.timeline()
         .to('.section1 .word-inner', {filter: "blur(10px)", scale: 0.8})
-        .to('.img-star', {
-            rotation: 360,
-            scale: 100,
-        }, 0)
-        .to('.text-layout-center', {autoAlpha: 1})
+        .to('.img-star',{width:innerWidth * 10,height:innerWidth * 10,rotation:90, bottom:-(innerWidth * 5)},0)
+        .to('.text-layout-center', {autoAlpha: 1},'-=0.1')
         .to('.text-layout-center .stagger', {
             filter: "blur(0px)", duration: 0.8, transform: 'scale(1)', stagger: {
                 each: 0.5,
@@ -210,9 +208,10 @@ const homeAni = () => {
 
 
     ScrollTrigger.create({
+        // markers:true,
         trigger: '.section1',
         start: 'top top',
-        bottom: '+=2000',
+        end: '+=1000',
         pin: true,
         pinSpacing: true,
         scrub: 0.5,
@@ -237,7 +236,7 @@ const characterAni = () => {
                         stagger: 1,
                         scrollTrigger: {
                             trigger: container,
-                            scrub: true,
+                            scrub: 0.5,
                             start: "clamp(top center)",
                             end: "clamp(bottom center)",
                             once: true,
@@ -270,7 +269,7 @@ const characterAni = () => {
                     return (childTop - parentTop);
                 }
             }),
-            scrub:true,
+            scrub:0.5,
         })
         return()=>{
             titleAni.kill();
@@ -287,7 +286,6 @@ const abilityAni = () => {
     // 3. 부모요소 스크롤 시 자식요소 애니메이션 동작하게 작업
     const wordLayout = document.querySelector('.section3 .word-inner')
     const {words} = new SplitText(wordLayout, {type: 'words'})
-
     const animation = gsap.fromTo(words,
         {
             x: 0,
@@ -298,36 +296,40 @@ const abilityAni = () => {
             },
         },
     )
-
     let clamp = gsap.utils.clamp(-25, 25);
 
-    ScrollTrigger.create({
-        trigger: '.section3',
-        start: 'top top',
-        end: "+=3000px",
-
-        // pinnedContainer:'.section3',
-        pin: true,
-        animation,
-        scrub: true,
-        onUpdate: ({progress, getVelocity}) => {
-            let widthToProgress = progress.toFixed(2) * 100
-            let Velocity = getVelocity()
-            let skew = clamp(Velocity/-50);
-            gsap.to('.section3', {
-                background: widthToProgress >= 50 ? '#000' : '#fff',
-                color: widthToProgress >= 50 ? '#fff' : '#000'
-            })
-
-            gsap.fromTo(words,
-                {
-                    skewX: `${skew}deg`,
-                    duration: 1,
-                }, {
-                    skewX: 0,
-                    duration: 1,
+    mm.add(mmOption.isMobile,()=>{
+        let ScrollAni = ScrollTrigger.create({
+            trigger: '.section3',
+            start: 'top top',
+            end: "+=3000px",
+            // pinnedContainer:'.section3',
+            pin: true,
+            animation,
+            scrub: 0.5,
+            onUpdate: ({progress, getVelocity}) => {
+                let widthToProgress = progress.toFixed(2) * 100
+                let Velocity = getVelocity()
+                let skew = clamp(Velocity/-50);
+                gsap.to('.section3', {
+                    background: widthToProgress >= 50 ? '#000' : '#fff',
+                    color: widthToProgress >= 50 ? '#fff' : '#000'
                 })
-        },
+
+                gsap.fromTo(words,
+                    {
+                        skewX: `${skew}deg`,
+                        duration: 1,
+                    }, {
+                        skewX: 0,
+                        duration: 1,
+                    })
+            },
+        })
+
+        return()=>{
+            ScrollAni.kill()
+        }
     })
 }
 const workAni = () => {
