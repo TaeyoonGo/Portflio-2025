@@ -85,47 +85,34 @@
     position: fixed;
     left: 0;
     width: 100%;
-    background-color: var.$color-white-200;;
+    background-color: var.$color-white-200;
     z-index: 101;
     transform: translateY(config.rem(-90));
-
-    button {
-        background: inherit;
-        border: none;
-        box-shadow: none;
-        border-radius: 0;
-        padding: 0;
-        overflow: visible;
-    }
-
     .header-grid {
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: config.rem(20) config.rem(40);
+        @include config.lg-res{
+            padding: config.rem(20) config.rem(20);
+        }
     }
-
     .navi-list {
         display: flex;
         gap: config.rem(24);
         @include config.md-res {
             display: none;
         }
-
         .item {
             position: relative;
-
-            button {
-                cursor: pointer;
-                font-weight: var.$font-weight-semi-bold;
-                font-size: config.rem(24);
+            span{
+                display: inline-block;
             }
-
             .bar {
                 bottom: config.rem(-6);
                 left: 0;
                 position: absolute;
-                border: 1px solid var.$color-white;;
+                border: 1px solid var.$color-white;
                 transform: scaleX(0);
                 width: 100%;
                 transform-origin: center center;
@@ -149,13 +136,92 @@
 
         em {
             font-weight: 500;
-                color: inherit;
+            color: inherit;
             font-size: config.rem(16);
             display: block;
             @include config.md-res {
                 font-size: config.rem(16);
             }
         }
+    }
+    nav{
+        @include config.md-res{
+            display: none;
+        }
+        &.mo-nav{
+            z-index: 1000;
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100dvw;
+            height: 100dvh;
+            background-color:   var.$color-white-200;
+
+            @include config.md-res{
+                display: block;
+            }
+
+        }
+    }
+    button {
+        cursor: pointer;
+        font-weight: var.$font-weight-semi-bold;
+        font-size: config.rem(24);
+        background: inherit;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0;
+        overflow: visible;
+    }
+    .mo-navi-open-button{
+        display: none;
+        @include config.md-res{
+            display: block;
+        }
+    }
+    .mo-navi-close-button{
+        position: absolute;
+        top: config.rem(20) ;
+        right: config.rem(40);
+        @include config.lg-res{
+            top: config.rem(28);
+            right: config.rem(20);
+        }
+    }
+    .mo-navi-list{
+        padding: config.rem(80) config.rem(40) 0;
+
+        .item{
+            margin-bottom: config.rem(20);
+            &:nth-child(5){
+                margin-bottom: config.rem(40);
+            }
+            span{
+                display: inline-block;
+            }
+            button{
+                color: var.$color-black;
+                font-size: config.rem(37);
+                font-weight: var.$font-weight-semi-bold;
+            }
+        }
+
+    }
+    .item-link{
+        a{
+            text-decoration: none;
+            color: var.$color-black;
+            display: inline-block;
+            width: 100%;
+            font-weight: var.$font-weight-semi-bold;
+            margin-bottom: config.rem(18);
+            font-size: config.rem(28);
+        }
+
     }
 }
 
@@ -504,7 +570,7 @@
         height: auto;
     }
     @include config.md-res {
-        //display: none;
+        display: none;
     }
 
     .contact-list {
@@ -518,20 +584,11 @@
             gap: config.rem(16);
             padding: config.rem(20) config.rem(40);
         }
-        @include config.md-res {
-            justify-content: start;
-            gap: 0;
-        }
+
 
         .item {
             color: var.$color-black;
-            @include config.md-res {
-                flex: 1 1 25%;
-                &.copyright,
-                &.work {
-                    display: none;
-                }
-            }
+
 
             .title {
                 font-size: config.rem(32);
@@ -542,9 +599,6 @@
                     font-size: config.rem(24);
                     text-align: center;
                     margin-bottom: config.rem(10);
-                }
-                @include config.md-res {
-                    display: none;
                 }
             }
 
@@ -565,15 +619,11 @@
                     display: inline-block;
                     text-decoration: none;
                     color: var.$color-black;
-
-                    &.instagram {
-                        margin-right: config.rem(10);
-                        @include config.sm-res {
-                            margin-right: 0;
-                        }
+                    margin-right: config.rem(16);
+                    &:nth-last-child(1){
+                        margin-right: 0;
                     }
                 }
-
                 .ico-envelope, .ico-phone {
                     display: none;
                     @include config.xl-res {
@@ -586,13 +636,6 @@
                         display: none;
                     }
                 }
-                @include config.md-res {
-                    &.alink {
-                        display: flex;
-                        justify-content: space-between;
-                    }
-                }
-
             }
         }
     }

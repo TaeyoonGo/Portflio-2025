@@ -91,10 +91,14 @@ const IntroMasterTimeline = () => {
         })
 }
 const navigation = () => {
+    gsap.set('.mo-nav',{translateX:'100%'})
+
+
     let navArr = gsap.utils.toArray('.navi-list > li')
     let header = document.querySelector('.sticky-header')
     let sectionArr = gsap.utils.toArray('.section')
-
+    const moOpenBtn = document.querySelector('.mo-navi-open-button')
+    const moCloseBtn = document.querySelector('.mo-navi-close-button')
 
     const scroll = sectionArr.map((section, _) => {
         let scrollToEvent = ScrollTrigger.create({
@@ -120,7 +124,14 @@ const navigation = () => {
 
     })
 
+    moOpenBtn.addEventListener('click',()=>{
+        gsap.to('.mo-nav',{translateX:0,ease:'bounce',duration:0.5})
+    })
+    moCloseBtn.addEventListener('click',()=>{
+        gsap.to('.mo-nav',{translateX:'100%',ease:'power3.inOut',duration:0.5})
+    })
 }
+
 const Loading = () => {
     gsap.to(window, {duration: 0, scrollTo: {y: 0, x: 0}, ease: "none"});
     smoother.paused(true);
