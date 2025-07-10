@@ -18,7 +18,6 @@ const tl = gsap.timeline();
 const mm = gsap.matchMedia();
 
 
-
 const mmOption = {
     isMobile: '(min-width:661px)',
     isDesktop: '(min-width:1199px)',
@@ -91,7 +90,7 @@ const IntroMasterTimeline = () => {
         })
 }
 const navigation = () => {
-    gsap.set('.mo-nav',{translateX:'100%'})
+    gsap.set('.mo-nav', {translateX: '100%'})
 
 
     let navArr = gsap.utils.toArray('.navi-list > li')
@@ -99,6 +98,9 @@ const navigation = () => {
     let sectionArr = gsap.utils.toArray('.section')
     const moOpenBtn = document.querySelector('.mo-navi-open-button')
     const moCloseBtn = document.querySelector('.mo-navi-close-button')
+    const moNavArr = gsap.utils.toArray('.mo-navi-list > .item');
+
+    console.log(moNavArr)
 
     const scroll = sectionArr.map((section, _) => {
         let scrollToEvent = ScrollTrigger.create({
@@ -107,6 +109,18 @@ const navigation = () => {
             end: `bottom ${header.offsetHeight}px`,
         })
         return scrollToEvent
+    })
+
+    moNavArr.forEach((nav, index) => {
+        nav.addEventListener('click', () => {
+            gsap.to(window, {
+                duration: 1,
+                scrollTo: scroll[index].start,
+                onComplete: () => {
+                    gsap.to('.mo-nav', {translateX: '100%', ease: 'power3.inOut', duration: 0.5})
+                }
+            });
+        })
     })
 
 
@@ -124,11 +138,11 @@ const navigation = () => {
 
     })
 
-    moOpenBtn.addEventListener('click',()=>{
-        gsap.to('.mo-nav',{translateX:0,ease:'bounce',duration:0.5})
+    moOpenBtn.addEventListener('click', () => {
+        gsap.to('.mo-nav', {translateX: 0, ease: 'bounce', duration: 0.5})
     })
-    moCloseBtn.addEventListener('click',()=>{
-        gsap.to('.mo-nav',{translateX:'100%',ease:'power3.inOut',duration:0.5})
+    moCloseBtn.addEventListener('click', () => {
+        gsap.to('.mo-nav', {translateX: '100%', ease: 'power3.inOut', duration: 0.5})
     })
 }
 
@@ -201,14 +215,14 @@ function init() {
 const homeAni = () => {
     gsap.set('.text-layout-center', {autoAlpha: 0})
     gsap.set('.img-star', {translateX: '-50%', transformOrigin: 'center center'})
-    mm.add(mmOption,(ctx)=>{
+    mm.add(mmOption, (ctx) => {
         const {isMobile} = ctx.conditions
-        gsap.set('.text-layout-center .stagger', {filter: isMobile ? "blur(10px)" : "blur(0px)", transform: isMobile ?'scale(0.8)' : "scale(1)"})
+        gsap.set('.text-layout-center .stagger', {
+            filter: isMobile ? "blur(10px)" : "blur(0px)",
+            transform: isMobile ? 'scale(0.8)' : "scale(1)"
+        })
 
     })
-
-
-
 
 
     const timeline = gsap.timeline()
