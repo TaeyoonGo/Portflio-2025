@@ -62,6 +62,10 @@ const IntroText = () => {
 
     return animation
 }
+const IntroCircle = () =>{
+    console.log('hello')
+}
+IntroCircle()
 const HeaderAni = () => {
     const header = document.querySelector('.sticky-header')
     gsap.set(header, {y: -90})
@@ -100,8 +104,6 @@ const navigation = () => {
     const moCloseBtn = document.querySelector('.mo-navi-close-button')
     const moNavArr = gsap.utils.toArray('.mo-navi-list > .item');
 
-    console.log(moNavArr)
-
     const scroll = sectionArr.map((section, _) => {
         let scrollToEvent = ScrollTrigger.create({
             trigger: section,
@@ -116,7 +118,7 @@ const navigation = () => {
             gsap.to(window, {
                 duration: 1,
                 scrollTo: scroll[index].start,
-                onComplete: () => {
+                onStart: () => {
                     gsap.to('.mo-nav', {translateX: '100%', ease: 'power3.inOut', duration: 0.5})
                 }
             });
@@ -194,10 +196,6 @@ const mousePoint = () => {
             gsap.to(cursor.querySelector('span'), {autoAlpha: 0})
         })
     })
-
-}
-
-const circleAni = () => {
 
 }
 

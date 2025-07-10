@@ -178,12 +178,14 @@
         overflow: visible;
     }
     .mo-navi-open-button{
+        color: var.$color-black;
         display: none;
         @include config.md-res{
             display: block;
         }
     }
     .mo-navi-close-button{
+        color: var.$color-black;
         position: absolute;
         top: config.rem(20) ;
         right: config.rem(40);
@@ -330,6 +332,8 @@
                 }
             }
         }
+
+
     }
 
     &.section2 {
